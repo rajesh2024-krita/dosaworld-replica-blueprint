@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import idliImage from "@/assets/idli.jpg";
@@ -17,13 +18,15 @@ const AboutSection = () => {
               with fresh ingredients and aromatic spices. Experience the vibrant flavors of South India 
               in every bite at Dosa World.
             </p>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="border-primary text-primary hover:bg-primary hover:text-white"
-            >
-              READ MORE
-            </Button>
+            <Link to="/about">
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-primary text-primary hover:bg-primary hover:text-white"
+              >
+                READ MORE
+              </Button>
+            </Link>
           </div>
           
           <div className="flex justify-center">

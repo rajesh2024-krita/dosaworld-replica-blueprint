@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
 
 const Footer = () => {
@@ -21,11 +22,12 @@ const Footer = () => {
           <div>
             <h3 className="font-serif text-lg font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><a href="#home" className="text-restaurant-cream hover:text-white transition-colors">Home</a></li>
-              <li><a href="#menu" className="text-restaurant-cream hover:text-white transition-colors">Menu</a></li>
-              <li><a href="#about" className="text-restaurant-cream hover:text-white transition-colors">About</a></li>
-              <li><a href="#contact" className="text-restaurant-cream hover:text-white transition-colors">Contact</a></li>
-              <li><a href="#reservations" className="text-restaurant-cream hover:text-white transition-colors">Reservations</a></li>
+              <li><Link to="/" className="text-restaurant-cream hover:text-white transition-colors">Home</Link></li>
+              <li><Link to="/online-ordering" className="text-restaurant-cream hover:text-white transition-colors">Menu</Link></li>
+              <li><Link to="/about" className="text-restaurant-cream hover:text-white transition-colors">About</Link></li>
+              <li><Link to="/contact" className="text-restaurant-cream hover:text-white transition-colors">Contact</Link></li>
+              <li><Link to="/reservations" className="text-restaurant-cream hover:text-white transition-colors">Reservations</Link></li>
+              <li><Link to="/privacy-policy" className="text-restaurant-cream hover:text-white transition-colors">Privacy Policy</Link></li>
             </ul>
           </div>
 

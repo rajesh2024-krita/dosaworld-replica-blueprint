@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/logo.png";
@@ -17,13 +18,15 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <a href="#home" className="text-foreground hover:text-primary transition-colors">Home</a>
-          <a href="#menu" className="text-foreground hover:text-primary transition-colors">Menu</a>
-          <a href="#about" className="text-foreground hover:text-primary transition-colors">About</a>
-          <a href="#contact" className="text-foreground hover:text-primary transition-colors">Contact</a>
-          <Button className="bg-primary hover:bg-primary/90">
-            Reservation
-          </Button>
+          <Link to="/" className="text-foreground hover:text-primary transition-colors">Home</Link>
+          <Link to="/online-ordering" className="text-foreground hover:text-primary transition-colors">Menu</Link>
+          <Link to="/about" className="text-foreground hover:text-primary transition-colors">About</Link>
+          <Link to="/contact" className="text-foreground hover:text-primary transition-colors">Contact</Link>
+          <Link to="/reservations">
+            <Button className="bg-primary hover:bg-primary/90">
+              Reservation
+            </Button>
+          </Link>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -38,13 +41,15 @@ const Header = () => {
         {isMenuOpen && (
           <div className="absolute top-16 left-0 right-0 bg-background border-b md:hidden">
             <nav className="flex flex-col p-4 space-y-4">
-              <a href="#home" className="text-foreground hover:text-primary transition-colors">Home</a>
-              <a href="#menu" className="text-foreground hover:text-primary transition-colors">Menu</a>
-              <a href="#about" className="text-foreground hover:text-primary transition-colors">About</a>
-              <a href="#contact" className="text-foreground hover:text-primary transition-colors">Contact</a>
-              <Button className="bg-primary hover:bg-primary/90 w-full">
-                Reservation
-              </Button>
+              <Link to="/" className="text-foreground hover:text-primary transition-colors">Home</Link>
+              <Link to="/online-ordering" className="text-foreground hover:text-primary transition-colors">Menu</Link>
+              <Link to="/about" className="text-foreground hover:text-primary transition-colors">About</Link>
+              <Link to="/contact" className="text-foreground hover:text-primary transition-colors">Contact</Link>
+              <Link to="/reservations">
+                <Button className="bg-primary hover:bg-primary/90 w-full">
+                  Reservation
+                </Button>
+              </Link>
             </nav>
           </div>
         )}

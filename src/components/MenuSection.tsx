@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import heroDosa from "@/assets/hero-dosa.jpg";
@@ -27,12 +28,14 @@ const MenuSection = () => {
               specialty Masala Dosa and tangy Sambar. Explore our full menu by visiting 
               the menu page.
             </p>
-            <Button 
-              size="lg"
-              className="bg-primary hover:bg-primary/90 text-white"
-            >
-              VIEW MENU
-            </Button>
+            <Link to="/online-ordering">
+              <Button 
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-white"
+              >
+                VIEW MENU
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

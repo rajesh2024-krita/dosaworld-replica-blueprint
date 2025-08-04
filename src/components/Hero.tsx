@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import heroDosa from "@/assets/hero-dosa.jpg";
 
@@ -27,12 +28,14 @@ const Hero = () => {
           </p>
           <p className="text-lg md:text-xl mb-8 italic">Hamburg</p>
           
-          <Button 
-            size="lg" 
-            className="bg-white text-primary hover:bg-white/90 font-semibold px-8 py-4 text-lg rounded-full"
-          >
-            RESERVE YOUR TABLE!
-          </Button>
+          <Link to="/reservations">
+            <Button 
+              size="lg" 
+              className="bg-white text-primary hover:bg-white/90 font-semibold px-8 py-4 text-lg rounded-full"
+            >
+              RESERVE YOUR TABLE!
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

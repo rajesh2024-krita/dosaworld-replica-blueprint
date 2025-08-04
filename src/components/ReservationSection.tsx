@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
@@ -23,12 +24,14 @@ const ReservationSection = () => {
             <p className="text-muted-foreground mb-6">
               Choose your preferred date and time for an unforgettable dining experience.
             </p>
-            <Button 
-              size="lg"
-              className="w-full bg-restaurant-orange hover:bg-restaurant-orange/90 text-white"
-            >
-              RESERVE YOUR TABLE
-            </Button>
+            <Link to="/reservations">
+              <Button 
+                size="lg"
+                className="w-full bg-restaurant-orange hover:bg-restaurant-orange/90 text-white"
+              >
+                RESERVE YOUR TABLE
+              </Button>
+            </Link>
           </Card>
         </div>
       </div>
