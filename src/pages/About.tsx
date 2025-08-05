@@ -2,91 +2,47 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import idliImage from "@/assets/idli.jpg";
+import hotelImage from "@/assets/hotel.png";
 
 const About = () => {
   return (
     <div className="min-h-screen">
       <Header />
-      
-      {/* Hero Section */}
-      <section className="pt-24 pb-16 bg-restaurant-cream/30">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h1 className="font-serif text-5xl font-bold mb-6 text-primary">
-              ABOUT US
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Welcome to Dosa World, where South Indian flavors come alive in Hamburg.
-            </p>
-          </div>
-        </div>
-      </section>
 
-      {/* Main Content */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
-            <div>
-              <h2 className="font-serif text-3xl font-bold mb-6 text-primary">
-                Our Story
-              </h2>
-              <p className="text-lg mb-6 text-muted-foreground leading-relaxed">
-                Our menu features everything from crispy dosas and soft idlis to aromatic biryanis, 
-                all made with fresh ingredients and traditional spices. At Dosa World, we're dedicated 
-                to delivering an authentic and memorable dining experience.
+      <div className="h-screen">
+        <div className="flex flex-wrap">
+          <div className="w-full h-screen lg:w-1/2 text-center mt-20 px-12">
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              viewBox="21 20 159.3 160" 
+              fill="black" 
+              className="w-6 h-6 sm:w-8 sm:h-8 mt-10 mx-auto" 
+              aria-hidden="true"
+            >
+              <path d="M180.3 99.4c0 1.3-43 2.7-43 2.7-18.7 0-34.1 15.3-34.1 34.1 0 0-1.3 43.8-2.7 43.8s-2.7-43.8-2.7-43.8c0-18.7-15.3-34.1-34.1-34.1 0 0-42.7-1.3-42.7-2.7s42.7-2.7 42.7-2.7c18.7 0 34.1-15.3 34.1-34.1 0 0 1.4-42.7 2.8-42.6 1.3 0 2.6 42.6 2.6 42.6 0 18.7 15.3 34.1 34.1 34.1 0 0 42.9 1.3 43 2.7Z"/>
+            </svg>
+            <h1 className="font-sans font-semibold font-medium uppercase text-[40px] md:text-[50px] lg:text-[80px] leading-tight py-10 sm:py-5 mt-10">
+                About Us
+              </h1>
+              <p className="px-20 text-center">
+                Welcome to Dosa World, where South Indian flavors come alive in Hamburg. Our menu features everything from crispy dosas and soft idlis to aromatic biryanis, all made with fresh ingredients and traditional spices.
               </p>
-              <p className="text-lg mb-6 text-muted-foreground leading-relaxed">
-                Each dish is a celebration of South Indian culinary heritage, crafted to delight your 
-                taste buds. Join us and savor the vibrant flavors of South India in the heart of Hamburg.
+              <p className="pt-10 px-20 text-center">At Dosa World, we’re dedicated to delivering an authentic and memorable dining experience. Each dish is a celebration of South Indian culinary heritage, crafted to delight your taste buds. Join us and savor the vibrant flavors of South India.
               </p>
-            </div>
-            
-            <div className="flex justify-center">
-              <img 
-                src={idliImage} 
-                alt="Traditional South Indian Food" 
-                className="w-full max-w-md h-[400px] object-cover rounded-lg shadow-xl"
+          </div>
+            <div
+              className="w-full h-screen lg:w-1/2 flex items-end justify-center"
+              style={{ backgroundColor: "#ff8800" }}
+            >
+              <img
+                src={hotelImage}
+                alt="hotel image"
+                className="mb-4 w-auto max-h-[90%]" // optional sizing & bottom spacing
               />
             </div>
-          </div>
 
-          {/* Quote Section */}
-          <div className="text-center py-16 bg-restaurant-green text-white rounded-lg">
-            <blockquote className="font-serif text-3xl md:text-4xl font-bold mb-4">
-              "We make food that makes people happy"
-            </blockquote>
-            <cite className="text-restaurant-cream text-lg">
-              - DOSA WORLD -
-            </cite>
-          </div>
-
-          {/* Values Section */}
-          <div className="grid md:grid-cols-3 gap-8 mt-16">
-            <div className="text-center">
-              <h3 className="font-serif text-xl font-bold mb-4 text-primary">Authentic Flavors</h3>
-              <p className="text-muted-foreground">
-                Traditional South Indian recipes passed down through generations, 
-                prepared with authentic spices and techniques.
-              </p>
-            </div>
-            <div className="text-center">
-              <h3 className="font-serif text-xl font-bold mb-4 text-primary">Fresh Ingredients</h3>
-              <p className="text-muted-foreground">
-                We source the finest ingredients daily to ensure every dish 
-                meets our high standards of quality and freshness.
-              </p>
-            </div>
-            <div className="text-center">
-              <h3 className="font-serif text-xl font-bold mb-4 text-primary">Warm Hospitality</h3>
-              <p className="text-muted-foreground">
-                Experience genuine South Indian hospitality in a welcoming 
-                atmosphere that makes every meal special.
-              </p>
-            </div>
-          </div>
         </div>
-      </section>
-
+      </div>
       <Footer />
     </div>
   );
