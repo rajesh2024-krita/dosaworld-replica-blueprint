@@ -1,5 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Star } from "lucide-react";
+import Briyani from '../assets/Briyani.avif';
+import { useEffect, useState } from "react";
 
 const ReviewsSection = () => {
   const reviews = [
@@ -17,29 +19,41 @@ const ReviewsSection = () => {
     }
   ];
 
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % reviews.length);
+    }, 3000); // Change every 3 seconds
+    return () => clearInterval(interval);
+  }, [reviews.length]);
+
   return (
     <section className="py-16 bg-restaurant-cream/30">
-      <div className="container mx-auto px-4">
-        <h2 className="font-serif text-4xl font-bold text-center mb-12 text-primary">
-          REVIEWS
-        </h2>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {reviews.map((review, index) => (
-            <Card key={index} className="p-6 shadow-lg hover:shadow-xl transition-shadow">
-              <div className="flex mb-4">
+      <div className="grid md:grid-cols-2 grid-cols-1">
+        <div className="relative w-full h-96">
+          <img src={Briyani} alt="" className="absolute inset-0 w-full h-full object-cover" />
+        </div>
+        <div className=" bg-[#33522D] p-4">
+          <h2 className="font-serif text-4xl font-bold text-center mb-12 text-white">
+            REVIEWS
+          </h2>
+
+          <div className="flex justify-center">
+            <div className="p-6 w-full max-w-md text-center">
+              <blockquote className="text-muted-foreground mb-4 italic text-white">
+                "{reviews[current].text}"
+              </blockquote>
+              <cite className="font-semibold text-white">
+                - {reviews[current].author}
+              </cite>
+              <div className="flex justify-center mb-4">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-5 h-5 fill-restaurant-orange text-restaurant-orange" />
                 ))}
               </div>
-              <blockquote className="text-muted-foreground mb-4 italic">
-                "{review.text}"
-              </blockquote>
-              <cite className="font-semibold text-primary">
-                - {review.author}
-              </cite>
-            </Card>
-          ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -1,37 +1,43 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import heroDosa from "@/assets/hero-dosa.jpg";
+import heroDosa from "@/assets/idly.avif";
 
 const MenuSection = () => {
   return (
-    <section id="menu" className="py-16 bg-restaurant-cream/50">
-      <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="flex justify-center">
-            <Card className="overflow-hidden shadow-xl">
-              <img 
-                src={heroDosa} 
-                alt="South Indian Menu" 
-                className="w-full h-[400px] object-cover hover:scale-105 transition-transform duration-300"
-              />
-            </Card>
+    <section id="menu" className="">
+      <div className="">
+        <div className="grid md:grid-cols-2 gap-0 items-stretch min-h-[500px]">
+
+          {/* Left: Full Image */}
+          <div className="relative w-full h-full">
+            <img
+              src={heroDosa}
+              alt="South Indian Menu"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
           </div>
-          
-          <div>
-            <h2 className="font-serif text-4xl font-bold mb-6 text-primary">
+
+          {/* Right: Text Section */}
+          <div className="flex flex-col justify-center p-8 md:p-16 bg-[#FF8800] text-center">
+            <svg className="h-8" preserveAspectRatio="xMidYMid meet" data-bbox="21 20 159.3 160" viewBox="21 20 159.3 160" xmlns="http://www.w3.org/2000/svg" data-type="color" role="presentation" aria-hidden="true" aria-label=""><defs></defs>
+              <g>
+                <path fill="#0A2006" d="M180.3 99.4c0 1.3-43 2.7-43 2.7-18.7 0-34.1 15.3-34.1 34.1 0 0-1.3 43.8-2.7 43.8s-2.7-43.8-2.7-43.8c0-18.7-15.3-34.1-34.1-34.1 0 0-42.7-1.3-42.7-2.7s42.7-2.7 42.7-2.7c18.7 0 34.1-15.3 34.1-34.1 0 0 1.4-42.7 2.8-42.6 1.3 0 2.6 42.6 2.6 42.6 0 18.7 15.3 34.1 34.1 34.1 0 0 42.9 1.3 43 2.7Z" data-color="1"></path>
+              </g>
+            </svg>
+            <h2 className="font-serif text-[60px] font-bold mb-6 text-[#0A2006]">
               OUR MENU
             </h2>
-            <p className="text-lg mb-6 text-muted-foreground leading-relaxed">
-              Dosa World offers a variety of South Indian dishes, including crispy dosas, 
-              flavorful biryanis, and refreshing drinks like mango lassi. Don't miss our 
-              specialty Masala Dosa and tangy Sambar. Explore our full menu by visiting 
+            <p className="text-lg mb-6 text-muted-foreground leading-relaxed text-black px-16">
+              Dosa World offers a variety of South Indian dishes, including crispy dosas,
+              flavorful biryanis, and refreshing drinks like mango lassi. Don't miss our
+              specialty Masala Dosa and tangy Sambar. Explore our full menu by visiting
               the menu page.
             </p>
             <Link to="/online-ordering">
-              <Button 
+              <Button
                 size="lg"
-                className="bg-primary hover:bg-primary/90 text-white"
+                className="border-[#0A2006] border bg-transparent text-[#0A2006] rounded-full text-xl hover:bg-[#0A2006] hover:text-white"
               >
                 VIEW MENU
               </Button>

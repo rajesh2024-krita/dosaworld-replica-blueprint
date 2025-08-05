@@ -1,14 +1,14 @@
-import { Card } from "@/components/ui/card";
-import biryaniImage from "@/assets/biryani-bucket.jpg";
+import biryaniImage from "@/assets/briyani1.avif";
+import bgImage from "@/assets/11062b_909c4c1a78e54f998e22ac4141a1505c~mv2.avif";
 
 const PromoBanner = () => {
   return (
-    <section className="py-16 bg-restaurant-cream">
-      <div className="container mx-auto px-4">
-        <Card className="bg-restaurant-green text-white p-8 md:p-12 rounded-lg">
+    <section className="bg-cover bg-center w-full" style={{ backgroundImage: `url(${bgImage})` }}>
+      <div className="">
+        <div className=" text-white p-8 md:p-12">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4 text-[#FF8800]">
                 Bucket Briyani now available
               </h2>
               <p className="text-lg mb-2">With Raita & Gravy</p>
@@ -43,7 +43,7 @@ const PromoBanner = () => {
               />
             </div>
           </div>
-        </Card>
+        </div>
       </div>
     </section>
   );
