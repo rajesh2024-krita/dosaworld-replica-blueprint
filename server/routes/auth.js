@@ -10,15 +10,15 @@ const { authenticate, authorize } = require('../middleware/auth');
 const router = express.Router();
 
 // Email transporter setup
-const transporter = nodemailer.createTransporter({
-  host: process.env.EMAIL_HOST,
-  port: process.env.EMAIL_PORT,
-  secure: false,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
-});
+// const transporter = nodemailer.createTransporter({
+//   host: process.env.EMAIL_HOST,
+//   port: process.env.EMAIL_PORT,
+//   secure: false,
+//   auth: {
+//     user: process.env.EMAIL_USER,
+//     pass: process.env.EMAIL_PASS
+//   }
+// });
 
 // Login
 router.post('/login', async (req, res) => {
@@ -130,19 +130,19 @@ router.post('/forgot-password', async (req, res) => {
     // Send email (simplified - in production, use proper email templates)
     const resetUrl = `${req.protocol}://${req.get('host')}/reset-password?token=${resetToken}`;
     
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: user.email,
-      subject: 'Password Reset Request',
-      html: `
-        <h2>Password Reset Request</h2>
-        <p>Hello ${user.full_name},</p>
-        <p>You requested a password reset. Click the link below to reset your password:</p>
-        <a href="${resetUrl}">Reset Password</a>
-        <p>This link will expire in 1 hour.</p>
-        <p>If you didn't request this, please ignore this email.</p>
-      `
-    });
+    // await transporter.sendMail({
+    //   from: process.env.EMAIL_USER,
+    //   to: user.email,
+    //   subject: 'Password Reset Request',
+    //   html: `
+    //     <h2>Password Reset Request</h2>
+    //     <p>Hello ${user.full_name},</p>
+    //     <p>You requested a password reset. Click the link below to reset your password:</p>
+    //     <a href="${resetUrl}">Reset Password</a>
+    //     <p>This link will expire in 1 hour.</p>
+    //     <p>If you didn't request this, please ignore this email.</p>
+    //   `
+    // });
 
     res.json({ message: 'Password reset email sent' });
   } catch (error) {
