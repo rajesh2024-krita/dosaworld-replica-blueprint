@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import heroDosa from "@/assets/hero-dosa.jpg";
+import heroDosa from "@/assets/hero.avif";
 
 const Hero = () => {
   return (
@@ -18,7 +18,7 @@ const Hero = () => {
           <h1 className="font-serif text-5xl md:text-7xl font-bold mb-4">
             DOSA WORLD
           </h1>
-          <h2 className="font-serif text-2xl md:text-4xl mb-6">
+          <h2 className="font-serif text-2xl md:text-4xl mb-6 font-bold">
             INDISCHES RESTAURANT
           </h2>
           <p className="text-lg md:text-xl mb-2 flex items-center justify-center space-x-2">
