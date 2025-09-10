@@ -1,85 +1,108 @@
 
 const express = require('express');
 const { pool } = require('../config/database');
-const { authenticate } = require('../middleware/auth');
+const { authenticateToken } = require('../middleware/auth');
 
 const router = express.Router();
 
-// Get dashboard data
-router.get('/stats', authenticate, async (req, res) => {
+// Get dashboard statistics
+router.get('/stats', authenticateToken, async (req, res) => {
   try {
+    // Get today's date
     const today = new Date().toISOString().split('T')[0];
-    
-    // Sales stats
-    const [salesStats] = await pool.execute(`
+
+    // Get sales data
+    const [salesData] = await pool.execute(`
       SELECT 
         COUNT(*) as total_orders,
-        COALESCE(SUM(total_amount), 0) as total_revenue,
-        COALESCE(AVG(total_amount), 0) as avg_order_value
-      FROM orders 
-      WHERE DATE(created_at) = ? AND status = 'completed'
+        COALESCE(SUM(total_amount), 0) as total_revenue
+      FROM bills 
+      WHERE DATE(created_at) = ?
     `, [today]);
 
-    // Reservations stats
-    const [reservationStats] = await pool.execute(`
+    // Get reservations data
+    const [reservationsData] = await pool.execute(`
       SELECT 
         COUNT(*) as total_reservations,
-        SUM(CASE WHEN status = 'pending' THEN 1 ELSE 0 END) as pending_reservations,
         SUM(CASE WHEN status = 'confirmed' THEN 1 ELSE 0 END) as confirmed_reservations
       FROM reservations 
       WHERE reservation_date = ?
     `, [today]);
 
-    // Party bookings stats
-    const [partyStats] = await pool.execute(`
-      SELECT 
-        COUNT(*) as total_parties,
-        COALESCE(SUM(total_amount), 0) as party_revenue
-      FROM party_bookings 
-      WHERE event_date = ? AND status IN ('confirmed', 'completed')
-    `, [today]);
-
-    // Low stock alerts
-    const [lowStockItems] = await pool.execute(`
-      SELECT name, current_stock, min_stock_level, unit
-      FROM inventory_items 
-      WHERE current_stock <= min_stock_level AND is_active = true
-      ORDER BY (current_stock / min_stock_level) ASC
-      LIMIT 10
-    `);
-
-    // Recent orders
-    const [recentOrders] = await pool.execute(`
-      SELECT o.id, o.order_number, o.total_amount, o.status, o.created_at,
-             COALESCE(t.table_number, 'Takeaway') as table_info
-      FROM orders o
-      LEFT JOIN tables t ON o.table_id = t.id
-      ORDER BY o.created_at DESC
-      LIMIT 5
-    `);
-
-    // Upcoming reservations
+    // Get upcoming reservations
     const [upcomingReservations] = await pool.execute(`
-      SELECT r.id, r.customer_name, r.customer_phone, r.reservation_time, 
-             r.guest_count, t.table_number
-      FROM reservations r
-      JOIN tables t ON r.table_id = t.id
-      WHERE r.reservation_date = ? AND r.status = 'confirmed'
-      ORDER BY r.reservation_time ASC
+      SELECT * FROM reservations 
+      WHERE reservation_date = ? AND status = 'confirmed'
+      ORDER BY reservation_time ASC
       LIMIT 5
     `, [today]);
 
-    res.json({
-      sales: salesStats[0],
-      reservations: reservationStats[0],
-      parties: partyStats[0],
-      lowStockItems,
-      recentOrders,
-      upcomingReservations
-    });
+    // Get low stock items
+    const [lowStockItems] = await pool.execute(`
+      SELECT * FROM inventory 
+      WHERE current_stock <= minimum_stock
+      ORDER BY current_stock ASC
+      LIMIT 5
+    `);
+
+    // Get recent bills
+    const [recentBills] = await pool.execute(`
+      SELECT * FROM bills 
+      ORDER BY created_at DESC
+      LIMIT 5
+    `);
+
+    const stats = {
+      todaySales: salesData[0]?.total_revenue || 0,
+      todayOrders: salesData[0]?.total_orders || 0,
+      todayReservations: reservationsData[0]?.total_reservations || 0,
+      confirmedReservations: reservationsData[0]?.confirmed_reservations || 0,
+      upcomingReservations: upcomingReservations || [],
+      lowStockItems: lowStockItems || [],
+      recentBills: recentBills || []
+    };
+
+    res.json(stats);
   } catch (error) {
     console.error('Dashboard stats error:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Get sales chart data
+router.get('/sales-chart', authenticateToken, async (req, res) => {
+  try {
+    const { period = 'week' } = req.query;
+    
+    let dateCondition = '';
+    let groupBy = '';
+    
+    if (period === 'week') {
+      dateCondition = 'WHERE created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)';
+      groupBy = 'DATE(created_at)';
+    } else if (period === 'month') {
+      dateCondition = 'WHERE created_at >= DATE_SUB(NOW(), INTERVAL 30 DAY)';
+      groupBy = 'DATE(created_at)';
+    } else if (period === 'year') {
+      dateCondition = 'WHERE created_at >= DATE_SUB(NOW(), INTERVAL 12 MONTH)';
+      groupBy = 'DATE_FORMAT(created_at, "%Y-%m")';
+    }
+
+    const [chartData] = await pool.execute(`
+      SELECT 
+        ${groupBy} as date,
+        COUNT(*) as orders,
+        COALESCE(SUM(total_amount), 0) as revenue
+      FROM bills 
+      ${dateCondition}
+      GROUP BY ${groupBy}
+      ORDER BY date ASC
+    `);
+
+    res.json(chartData || []);
+  } catch (error) {
+    console.error('Sales chart error:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 });
 

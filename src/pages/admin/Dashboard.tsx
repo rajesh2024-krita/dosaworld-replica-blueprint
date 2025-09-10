@@ -2,61 +2,54 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { useAuth } from '../../contexts/AuthContext';
-import {
-  DollarSign,
-  Calendar,
-  PartyPopper,
+import { 
+  DollarSign, 
+  ShoppingCart, 
+  Users, 
+  Clock, 
   AlertTriangle,
   TrendingUp,
-  Users,
-  Clock,
+  Calendar,
   Package
 } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+
+const API_BASE_URL = 'http://localhost:3001/api';
 
 interface DashboardStats {
-  sales: {
-    total_orders: number;
-    total_revenue: number;
-    avg_order_value: number;
-  };
-  reservations: {
-    total_reservations: number;
-    pending_reservations: number;
-    confirmed_reservations: number;
-  };
-  parties: {
-    total_parties: number;
-    party_revenue: number;
-  };
-  lowStockItems: Array<{
-    name: string;
-    current_stock: number;
-    min_stock_level: number;
-    unit: string;
-  }>;
-  recentOrders: Array<{
-    id: number;
-    order_number: string;
-    total_amount: number;
-    status: string;
-    created_at: string;
-    table_info: string;
-  }>;
+  todaySales: number;
+  todayOrders: number;
+  todayReservations: number;
+  confirmedReservations: number;
   upcomingReservations: Array<{
     id: number;
     customer_name: string;
     customer_phone: string;
     reservation_time: string;
     guest_count: number;
-    table_number: string;
+    table_number: number;
+  }>;
+  lowStockItems: Array<{
+    id: number;
+    item_name: string;
+    current_stock: number;
+    minimum_stock: number;
+    unit: string;
+  }>;
+  recentBills: Array<{
+    id: number;
+    bill_number: string;
+    customer_name: string;
+    total_amount: number;
+    created_at: string;
   }>;
 }
 
-const Dashboard = () => {
+const Dashboard: React.FC = () => {
   const { token } = useAuth();
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchDashboardStats();
@@ -64,18 +57,23 @@ const Dashboard = () => {
 
   const fetchDashboardStats = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/dashboard/stats', {
+      setLoading(true);
+      const response = await fetch(`${API_BASE_URL}/dashboard/stats`, {
         headers: {
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
         }
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        setStats(data);
+      if (!response.ok) {
+        throw new Error('Failed to fetch dashboard data');
       }
+
+      const data = await response.json();
+      setStats(data);
     } catch (error) {
-      console.error('Error fetching dashboard stats:', error);
+      console.error('Dashboard fetch error:', error);
+      setError(error instanceof Error ? error.message : 'Failed to load dashboard');
     } finally {
       setLoading(false);
     }
@@ -83,27 +81,75 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      <div className="p-6">
+        <div className="animate-pulse space-y-4">
+          <div className="h-8 bg-gray-200 rounded w-1/4"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="h-32 bg-gray-200 rounded"></div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="p-6">
+        <Card>
+          <CardContent className="p-6">
+            <div className="text-center text-red-600">
+              <AlertTriangle className="h-12 w-12 mx-auto mb-4" />
+              <p className="text-lg font-semibold">Error Loading Dashboard</p>
+              <p className="text-sm text-muted-foreground mt-2">{error}</p>
+              <button 
+                onClick={fetchDashboardStats}
+                className="mt-4 px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90"
+              >
+                Retry
+              </button>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <div className="p-6 space-y-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-bold">Dashboard</h1>
+        <Badge variant="outline">
+          {new Date().toLocaleDateString()}
+        </Badge>
+      </div>
+
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Today's Revenue</CardTitle>
+            <CardTitle className="text-sm font-medium">Today's Sales</CardTitle>
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
-              ${stats?.sales.total_revenue.toFixed(2) || '0.00'}
-            </div>
+            <div className="text-2xl font-bold">${stats?.todaySales?.toFixed(2) || '0.00'}</div>
             <p className="text-xs text-muted-foreground">
-              {stats?.sales.total_orders || 0} orders today
+              <TrendingUp className="inline h-3 w-3 mr-1" />
+              Revenue for today
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Orders</CardTitle>
+            <ShoppingCart className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{stats?.todayOrders || 0}</div>
+            <p className="text-xs text-muted-foreground">
+              Orders completed today
             </p>
           </CardContent>
         </Card>
@@ -111,83 +157,32 @@ const Dashboard = () => {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Reservations</CardTitle>
-            <Calendar className="h-4 w-4 text-muted-foreground" />
+            <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
-              {stats?.reservations.total_reservations || 0}
-            </div>
+            <div className="text-2xl font-bold">{stats?.confirmedReservations || 0}</div>
             <p className="text-xs text-muted-foreground">
-              {stats?.reservations.pending_reservations || 0} pending
+              Confirmed for today
             </p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Party Revenue</CardTitle>
-            <PartyPopper className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium">Low Stock</CardTitle>
+            <Package className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
-              ${stats?.parties.party_revenue.toFixed(2) || '0.00'}
-            </div>
+            <div className="text-2xl font-bold">{stats?.lowStockItems?.length || 0}</div>
             <p className="text-xs text-muted-foreground">
-              {stats?.parties.total_parties || 0} parties today
+              Items need restocking
             </p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Low Stock Alerts</CardTitle>
-            <AlertTriangle className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-orange-600">
-              {stats?.lowStockItems.length || 0}
-            </div>
-            <p className="text-xs text-muted-foreground">items need restocking</p>
           </CardContent>
         </Card>
       </div>
 
+      {/* Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Recent Orders */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <TrendingUp className="h-5 w-5 mr-2" />
-              Recent Orders
-            </CardTitle>
-            <CardDescription>Latest order activity</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {stats?.recentOrders.length ? (
-                stats.recentOrders.map((order) => (
-                  <div key={order.id} className="flex items-center justify-between">
-                    <div>
-                      <p className="font-medium">{order.order_number}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {order.table_info} • {new Date(order.created_at).toLocaleTimeString()}
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-medium">${order.total_amount.toFixed(2)}</p>
-                      <Badge variant={order.status === 'completed' ? 'default' : 'secondary'}>
-                        {order.status}
-                      </Badge>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <p className="text-muted-foreground text-center py-4">No recent orders</p>
-              )}
-            </div>
-          </CardContent>
-        </Card>
-
         {/* Upcoming Reservations */}
         <Card>
           <CardHeader>
@@ -227,46 +222,74 @@ const Dashboard = () => {
             </div>
           </CardContent>
         </Card>
-      </div>
 
-      {/* Low Stock Items */}
-      {stats?.lowStockItems.length ? (
+        {/* Low Stock Alert */}
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center">
-              <Package className="h-5 w-5 mr-2" />
-              Low Stock Alerts
+              <AlertTriangle className="h-5 w-5 mr-2 text-orange-500" />
+              Low Stock Alert
             </CardTitle>
             <CardDescription>Items that need immediate attention</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {stats.lowStockItems.map((item, index) => (
-                <div key={index} className="p-4 border rounded-lg">
-                  <div className="flex items-center justify-between mb-2">
-                    <h4 className="font-medium">{item.name}</h4>
-                    <Badge variant="destructive">Low Stock</Badge>
+            <div className="space-y-3">
+              {stats?.lowStockItems.length ? (
+                stats.lowStockItems.map((item) => (
+                  <div key={item.id} className="flex items-center justify-between">
+                    <div>
+                      <p className="font-medium">{item.item_name}</p>
+                      <p className="text-sm text-muted-foreground">
+                        Min: {item.minimum_stock} {item.unit}
+                      </p>
+                    </div>
+                    <Badge variant={item.current_stock === 0 ? "destructive" : "secondary"}>
+                      {item.current_stock} {item.unit}
+                    </Badge>
                   </div>
-                  <p className="text-sm text-muted-foreground">
-                    Current: {item.current_stock} {item.unit}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Minimum: {item.min_stock_level} {item.unit}
-                  </p>
-                  <div className="mt-2 bg-red-100 dark:bg-red-900/20 rounded-full h-2">
-                    <div 
-                      className="bg-red-500 h-2 rounded-full"
-                      style={{
-                        width: `${Math.min((item.current_stock / item.min_stock_level) * 100, 100)}%`
-                      }}
-                    ></div>
-                  </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <p className="text-muted-foreground text-center py-4">All items are well stocked</p>
+              )}
             </div>
           </CardContent>
         </Card>
-      ) : null}
+      </div>
+
+      {/* Recent Bills */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center">
+            <Calendar className="h-5 w-5 mr-2" />
+            Recent Bills
+          </CardTitle>
+          <CardDescription>Latest billing transactions</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-3">
+            {stats?.recentBills.length ? (
+              stats.recentBills.map((bill) => (
+                <div key={bill.id} className="flex items-center justify-between">
+                  <div>
+                    <p className="font-medium">#{bill.bill_number}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {bill.customer_name || 'Walk-in Customer'}
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-medium">${bill.total_amount}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {new Date(bill.created_at).toLocaleTimeString()}
+                    </p>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p className="text-muted-foreground text-center py-4">No recent bills</p>
+            )}
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };
