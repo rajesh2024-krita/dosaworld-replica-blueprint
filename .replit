@@ -1,3 +1,4 @@
+
 modules = ["nodejs-20", "web"]
 
 [nix]
@@ -7,16 +8,7 @@ channel = "stable-25_05"
 expertMode = true
 
 [workflows]
-runButton = "Project"
-
-[[workflows.workflow]]
-name = "Project"
-mode = "parallel"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Frontend"
+runButton = "Frontend"
 
 [[workflows.workflow]]
 name = "Frontend"
@@ -29,28 +21,6 @@ waitForPort = 5000
 
 [workflows.workflow.metadata]
 outputType = "webview"
-
-[[workflows.workflow]]
-name = "Full Stack Dev"
-author = 47432339
-mode = "parallel"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "cd server && npm run dev"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "npm run dev"
-
-[[workflows.workflow]]
-name = "Backend Server"
-author = 47432339
-mode = "sequential"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "cd server && npm start"
 
 [[ports]]
 localPort = 5000
