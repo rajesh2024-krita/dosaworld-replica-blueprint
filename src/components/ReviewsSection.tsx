@@ -31,28 +31,38 @@ const ReviewsSection = () => {
   return (
     <section className="py-16 bg-restaurant-cream/30">
       <div className="grid md:grid-cols-2 grid-cols-1">
-        <div className="relative w-full h-96">
-          <img src={Briyani} alt="" className="absolute inset-0 w-full h-full object-cover" />
+
+        {/* LEFT: IMAGE */}
+        <div className="relative w-full h-[250px] sm:h-[350px] md:h-[500px]">
+          <img
+            src={Briyani}
+            alt="Customer enjoying Biryani"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
         </div>
-        <div className=" bg-[#33522D] p-4">
-          <h2 className="font-serif text-4xl font-bold text-center mb-12 text-white">
+
+        {/* RIGHT: REVIEWS */}
+        <div className="bg-[#33522D] p-6 sm:p-10 flex flex-col justify-center text-center">
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-white">
             REVIEWS
           </h2>
 
           <div className="flex justify-center">
-            <div className="p-6 w-full max-w-md text-center">
-              <blockquote className="text-muted-foreground mb-4 italic text-white">
+            <Card className="p-6 w-full max-w-md text-center bg-transparent border-none shadow-none">
+              <blockquote className="text-sm sm:text-base md:text-lg mb-4 italic text-white leading-relaxed">
                 "{reviews[current].text}"
               </blockquote>
-              <cite className="font-semibold text-white">
+              <cite className="font-semibold text-white block mb-4">
                 - {reviews[current].author}
               </cite>
-              <div className="flex justify-center mb-4">
+
+              {/* STAR RATING */}
+              <div className="flex justify-center gap-1 mb-2">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-5 h-5 fill-restaurant-orange text-restaurant-orange" />
                 ))}
               </div>
-            </div>
+            </Card>
           </div>
         </div>
       </div>
