@@ -13,156 +13,112 @@ const Contact = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-24 pb-16 bg-restaurant-cream/30">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h1 className="font-serif text-5xl font-bold mb-6 text-primary">
-              CONTACT US
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Get in touch with us for reservations, inquiries, or just to say hello!
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Information & Form */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12">
-            
-            {/* Contact Information */}
-            <div>
-              <h2 className="font-serif text-3xl font-bold mb-8 text-primary">
-                Get In Touch
-              </h2>
+      <div>
+        <div className="flex flex-wrap mt-20">
+          {/* Left Panel */}
+          <div className="w-full md:w-[55%] lg:w-1/2 bg-[#33522d] flex items-start justify-center pr-20 sm:pr-10 h-full">
+            <div className="p-12 w-full max-w-2xl pr-0  mb-20">
               
-              <div className="space-y-6">
-                <Card className="p-6">
-                  <div className="flex items-start space-x-4">
-                    <MapPin className="w-6 h-6 text-restaurant-orange mt-1" />
-                    <div>
-                      <h3 className="font-semibold text-lg text-primary mb-2">Address</h3>
-                      <p className="text-muted-foreground">
-                        South Indian Restaurant<br />
-                        Hamburg, Germany<br />
-                        21073 Hamburg
-                      </p>
-                    </div>
-                  </div>
-                </Card>
+              {/* Icon */}
+              <div className="mb-6">
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  viewBox="21 20 159.3 160" 
+                  fill="white" 
+                  className="w-6 h-6 sm:w-8 sm:h-8" 
+                  aria-hidden="true"
+                >
+                  <path d="M180.3 99.4c0 1.3-43 2.7-43 2.7-18.7 0-34.1 15.3-34.1 34.1 0 0-1.3 43.8-2.7 43.8s-2.7-43.8-2.7-43.8c0-18.7-15.3-34.1-34.1-34.1 0 0-42.7-1.3-42.7-2.7s42.7-2.7 42.7-2.7c18.7 0 34.1-15.3 34.1-34.1 0 0 1.4-42.7 2.8-42.6 1.3 0 2.6 42.6 2.6 42.6 0 18.7 15.3 34.1 34.1 34.1 0 0 42.9 1.3 43 2.7Z"/>
+                </svg>
+              </div>
 
-                <Card className="p-6">
-                  <div className="flex items-start space-x-4">
-                    <Phone className="w-6 h-6 text-restaurant-orange mt-1" />
-                    <div>
-                      <h3 className="font-semibold text-lg text-primary mb-2">Phone</h3>
-                      <p className="text-muted-foreground">
-                        +49 (0) 123 456 789<br />
-                        For reservations and inquiries
-                      </p>
-                    </div>
-                  </div>
-                </Card>
+              {/* Heading */}
+              <h1 className="text-white font-sans font-semibold font-medium uppercase text-[40px] md:text-[50px] lg:text-[70px] leading-tight py-10 sm:py-5">
+                Contact Us
+              </h1>
 
-                <Card className="p-6">
-                  <div className="flex items-start space-x-4">
-                    <Mail className="w-6 h-6 text-restaurant-orange mt-1" />
-                    <div>
-                      <h3 className="font-semibold text-lg text-primary mb-2">Email</h3>
-                      <p className="text-muted-foreground">
-                        info@dosaworld.de<br />
-                        reservations@dosaworld.de
-                      </p>
-                    </div>
-                  </div>
-                </Card>
+              {/* Subtitle */}
+              <p className="text-white mt-4 mb-8 tracking-wide font-medium text-sm sm:text-xl md:text-base">
+                Fill out the form and we will reach out as soon as possible.
+              </p>
 
-                <Card className="p-6">
-                  <div className="flex items-start space-x-4">
-                    <Clock className="w-6 h-6 text-restaurant-orange mt-1" />
-                    <div>
-                      <h3 className="font-semibold text-lg text-primary mb-2">Opening Hours</h3>
-                      <div className="text-muted-foreground space-y-1">
-                        <p>Monday - Thursday: 11:30 AM - 10:00 PM</p>
-                        <p>Friday - Saturday: 11:30 AM - 11:00 PM</p>
-                        <p>Sunday: 12:00 PM - 10:00 PM</p>
-                      </div>
+              {/* Form Card */}
+              <div>
+                <form className="space-y-6">
+                  {/* Name fields */}
+                  <div className="mb-8">
+                    <label htmlFor="email" className="text-white block text-lg font-semibold mb-1">
+                      Email *
+                    </label>
+                    <input type="email" id="email" className="w-full bg-transparent border-b border-white text-white placeholder-white focus:outline-none py-2" />
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+                    <div className="mb-8">
+                      <label htmlFor="firstName" className="text-white block text-lg font-semibold mb-1">
+                        First Name *
+                      </label>
+                      <input type="text" id="firstName" className="w-full bg-transparent border-b border-white text-white placeholder-white focus:outline-none py-2" />
+                    </div>
+                    <div className="mb-8">
+                      <label htmlFor="lastName" className="text-white block text-lg font-semibold mb-1">
+                        Last Name *
+                      </label>
+                      <input type="text" id="lastName" className="w-full bg-transparent border-b border-white text-white placeholder-white focus:outline-none py-2" />
                     </div>
                   </div>
-                </Card>
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+                  {/* Phone */}
+                    <div className="mb-8">
+                      <label htmlFor="phone" className="text-white block text-lg font-semibold mb-1">
+                        Phone
+                      </label>
+                      <input type="tel" id="phone" className="w-full bg-transparent border-b border-white text-white placeholder-white focus:outline-none py-2"  />
+                    </div>
+                    <div className="mb-8">
+                      <button 
+                        type="submit"
+                        className="w-full py-3 mt-4 text-white hover:bg-white hover:text-[#33522d] transition-colors rounded-full border-[2px] border-white  font-semibold hover:font-medium"
+                      >
+                        Send Message
+                      </button>
+                    </div>                    
+                  </div>
+                  <div className="address">
+                      <p className=" py-1.5 text-3xl text-white">WHERE WE ARE</p>
+                      <p className=" py-1.5 text-2xl text-white">Lämmertwiete 2, 21073 Hamburg,</p>
+                      <p className=" py-1.5 text-2xl text-white">Germany, info@dosaworld.de</p>
+                      <p className=" py-1.5 text-2xl text-white">+4917622213135</p>
+                      <p className=" py-1.5 text-2xl text-white">04032527895</p>
+                    </div>
+                </form>
               </div>
             </div>
+          </div>
 
-            {/* Contact Form */}
-            <div>
-              <h2 className="font-serif text-3xl font-bold mb-8 text-primary">
-                Send us a Message
-              </h2>
-              
-              <Card className="p-8">
-                <form className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="firstName" className="text-primary font-semibold">
-                        First Name
-                      </Label>
-                      <Input type="text" id="firstName" className="mt-2" />
-                    </div>
-                    <div>
-                      <Label htmlFor="lastName" className="text-primary font-semibold">
-                        Last Name
-                      </Label>
-                      <Input type="text" id="lastName" className="mt-2" />
-                    </div>
-                  </div>
 
-                  <div>
-                    <Label htmlFor="email" className="text-primary font-semibold">
-                      Email
-                    </Label>
-                    <Input type="email" id="email" className="mt-2" />
-                  </div>
+          {/* Right Panel */}
 
-                  <div>
-                    <Label htmlFor="phone" className="text-primary font-semibold">
-                      Phone Number
-                    </Label>
-                    <Input type="tel" id="phone" className="mt-2" />
-                  </div>
 
-                  <div>
-                    <Label htmlFor="subject" className="text-primary font-semibold">
-                      Subject
-                    </Label>
-                    <Input type="text" id="subject" className="mt-2" />
-                  </div>
 
-                  <div>
-                    <Label htmlFor="message" className="text-primary font-semibold">
-                      Message
-                    </Label>
-                    <Textarea 
-                      id="message" 
-                      rows={5} 
-                      className="mt-2"
-                      placeholder="Tell us how we can help you..."
-                    />
-                  </div>
 
-                  <Button 
-                    type="submit" 
-                    size="lg" 
-                    className="w-full bg-restaurant-orange hover:bg-restaurant-orange/90 text-white"
-                  >
-                    Send Message
-                  </Button>
-                </form>
-              </Card>
+          <div className="w-full md:w-[45%] lg:w-1/2">
+            <div className="w-full h-[450px] md:h-full">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2375.278241291759!2d9.97872677595137!3d53.46348726595317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b19100445e7787%3A0x820c7593f06ff0a7!2sDosa%20World%20Indisches%20restaurant!5e0!3m2!1sen!2sin!4v1754302731126!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="w-full h-full"
+              />
             </div>
+
           </div>
         </div>
-      </section>
+      </div>
 
       <Footer />
     </div>

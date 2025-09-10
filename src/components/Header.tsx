@@ -14,7 +14,7 @@ const Header = () => {
       className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm p-3 transition-all duration-300
       ${isHomePage ? "bg-[#0A2006]" : "bg-[#0A2006] shadow-md"}`}
     >
-      <div className="container mx-auto px-6 md:px-32 h-16 flex items-center justify-between">
+      <div className="container px-6 md:px-32 h-16 flex items-center justify-between">
 
         {/* ====== LEFT NAVIGATION (Desktop) ====== */}
         <nav className="hidden md:flex items-center space-x-8 uppercase text-[18px]">
