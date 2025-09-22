@@ -7,7 +7,7 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Reservations from "./pages/Reservations";
 import Contact from "./pages/Contact";
-import OnlineOrdering from "./pages/OnlineOrdering";
+import MenuManagement from "./pages/MenuManagement";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
 
@@ -24,7 +24,7 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/reservations" element={<Reservations />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/online-ordering" element={<OnlineOrdering />} />
+          <Route path="/menu-list" element={<MenuManagement />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

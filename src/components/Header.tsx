@@ -20,7 +20,7 @@ const Header = () => {
         <nav className="hidden md:flex items-center space-x-8 uppercase text-[18px]">
           {isHomePage ? (
             <>
-              <Link to="/online-ordering" className="text-white hover:text-[#FF8601] transition-colors">Menu</Link>
+              <Link to="/menu-list" className="text-white hover:text-[#FF8601] transition-colors">Menu</Link>
               <Link to="/reservations">
                 <Button className="w-full text-white border-white uppercase text-[18px] font-normal p-6 border-2 rounded-full bg-transparent hover:border-[#33522D] transition-all duration-300 hover:text-[#FF8601]">
                   Reservation
