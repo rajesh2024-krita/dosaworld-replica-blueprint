@@ -1,0 +1,118 @@
+{
+  "header": {
+    "menu": "Menu",
+    "reservation": "Reservation",
+    "contact": "Contact Us",
+    "about": "About",
+    "home": "Home",
+    "language": "Language"
+  },
+  "hero": {
+    "title1": "DOSA WORLD",
+    "title2": "INDISCHES RESTAURANT",
+    "subtitle": "South Indian Restaurant",
+    "location": "Hamburg",
+    "button": "RESERVE YOUR TABLE!"
+  },
+  "promoBanner": {
+    "title": "Bucket Briyani now available",
+    "subtitle": "With Raita & Gravy",
+    "description": "Perfect for families, parties and real briyani lovers!",
+    "bucketS": {
+      "name": "Bucket S",
+      "people": "~3 People",
+      "price": "€ 41"
+    },
+    "bucketM": {
+      "name": "Bucket M",
+      "people": "~5 People",
+      "price": "€ 62"
+    }
+  },
+  "aboutSection": {
+    "title": "ABOUT US",
+    "description": "Welcome to Dosa World, Hamburg's premier destination for authentic South Indian cuisine. We specialize in crafting delicious dosas, idlis, and other traditional dishes, all made with fresh ingredients and aromatic spices. Experience the vibrant flavors of South India in every bite at Dosa World.",
+    "button": "READ MORE",
+    "imageAlt": "Traditional South Indian Food"
+  },
+  "menuSection": {
+    "title": "OUR MENU",
+    "description": "Dosa World offers a variety of South Indian dishes, including crispy dosas, flavorful biryanis, and refreshing drinks like mango lassi. Don't miss our specialty Masala Dosa and tangy Sambar. Explore our full menu by visiting the menu page.",
+    "button": "VIEW MENU",
+    "imageAlt": "South Indian Menu"
+  },
+  "reservationSection": {
+    "title": "RESERVATIONS",
+    "description": "Reserve your table at Dosa World with ease using our online reservation feature. Book in advance and enjoy a seamless dining experience at Hamburg’s top South Indian restaurant.",
+    "button": "Reserve your table",
+    "imageAlt": "Biryani Bucket"
+  },
+  "quoteSection": {
+    "quote": "The perfect place for any occasion",
+    "author": "- DOSA WORLD -"
+  },
+  "aboutPage": {
+    "title": "About Us",
+    "paragraph1": "Welcome to Dosa World, where South Indian flavors come alive in Hamburg. Our menu features everything from crispy dosas and soft idlis to aromatic biryanis.",
+    "paragraph2": "At Dosa World, we're dedicated to delivering an authentic and memorable dining experience. Each dish is a celebration of South Indian heritage.",
+    "quote": "We make food that makes people happy",
+    "quoteAuthor": "- DOSA WORLD -",
+    "imageAlt": "hotel"
+  },
+   "contactPage": {
+    "title": "Contact Us",
+    "subtitle": "Fill out the form and we will reach out as soon as possible.",
+    "form": {
+      "email": "Email *",
+      "firstName": "First Name *",
+      "lastName": "Last Name *",
+      "phone": "Phone",
+      "submit": "Send Message"
+    },
+    "addressSection": {
+      "heading": "WHERE WE ARE",
+      "line1": "Lämmertwiete 2, 21073 Hamburg,",
+      "line2": "Germany, info@dosaworld.de",
+      "line3": "+4917622213135",
+      "line4": "04032527895"
+    }
+  },
+  "reservationsPage": {
+    "breadcrumb": {
+      "home": "Home",
+      "reservation": "Reservation"
+    },
+    "header": {
+      "title": "REQUEST A RESERVATION",
+      "subtitle": "Share some details to make your request. PLEASE SELECT TIME TO SEE THE AVAILABLE SLOTS.",
+      "on": "on",
+      "at": "at"
+    },
+    "form": {
+      "members": "Members",
+      "guest": "guest",
+      "guests": "guests",
+      "date": "Date",
+      "time": "Time (auto-set from slot)",
+      "reserveNow": "RESERVE NOW",
+      "reserving": "Reserving..."
+    },
+    "timeslot": {
+      "choose": "Choose an available time slot:",
+      "booked": "Booked"
+    },
+    "alerts": {
+      "noTimeSelected": {
+        "title": "No time selected",
+        "text": "Please select a time slot before reserving!"
+      },
+      "reservationConfirmed": "Reservation Confirmed!",
+      "reservationErrorTitle": "Oops...",
+      "reservationErrorText": "Something went wrong. Please try again.",
+      "closedOnMonday": {
+        "title": "Closed on Mondays",
+        "text": "Reservations are not available on Mondays. Please choose another day."
+      }
+    }
+  }
+}

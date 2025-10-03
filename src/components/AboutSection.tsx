@@ -2,14 +2,16 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import idliImage from "@/assets/idli.jpg";
+import { useTranslation } from "react-i18next";
 
 const AboutSection = () => {
+  const { t } = useTranslation();
+
   return (
     <section id="about" className="py-16 bg-background">
       <div className="container mx-auto px-4">
-        {/* Use 2 columns on desktop, 1 column on mobile */}
         <div className="grid md:grid-cols-2 gap-12 items-center">
-
+          
           {/* LEFT: Text Section */}
           <div className="text-center md:text-left">
             <svg
@@ -26,14 +28,11 @@ const AboutSection = () => {
             </svg>
 
             <h2 className="font-serif text-3xl sm:text-4xl md:text-[80px] mb-6 text-[#0A2006] font-bold">
-              ABOUT US
+              {t("aboutSection.title")}
             </h2>
 
             <p className="text-base sm:text-lg mb-6 leading-relaxed text-muted-foreground max-w-xl mx-auto md:mx-0">
-              Welcome to Dosa World, Hamburg's premier destination for authentic South Indian cuisine. 
-              We specialize in crafting delicious dosas, idlis, and other traditional dishes, all made 
-              with fresh ingredients and aromatic spices. Experience the vibrant flavors of South India 
-              in every bite at Dosa World.
+              {t("aboutSection.description")}
             </p>
 
             <Link to="/about">
@@ -42,7 +41,7 @@ const AboutSection = () => {
                 size="lg"
                 className="border-[#0A2006] text-[#0A2006] hover:bg-[#0A2006] hover:text-white rounded-full font-bold transition-all duration-300"
               >
-                READ MORE
+                {t("aboutSection.button")}
               </Button>
             </Link>
           </div>
@@ -52,7 +51,7 @@ const AboutSection = () => {
             <Card className="overflow-hidden shadow-xl w-full max-w-md md:max-w-lg">
               <img
                 src={idliImage}
-                alt="Traditional South Indian Food"
+                alt={t("aboutSection.imageAlt")}
                 className="w-full h-[250px] sm:h-[300px] md:h-[400px] object-cover hover:scale-105 transition-transform duration-300"
               />
             </Card>

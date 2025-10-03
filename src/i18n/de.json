@@ -1,0 +1,118 @@
+{
+  "header": {
+    "menu": "Speisekarte",
+    "reservation": "Reservierung",
+    "contact": "Kontakt",
+    "about": "Über uns",
+    "home": "Startseite",
+    "language": "Sprache"
+  },
+  "hero": {
+    "title1": "DOSA WELT",
+    "title2": "INDISCHES RESTAURANT",
+    "subtitle": "Südindisches Restaurant",
+    "location": "Hamburg",
+    "button": "TISCH RESERVIEREN!"
+  },
+  "promoBanner": {
+    "title": "Briyani-Eimer jetzt verfügbar",
+    "subtitle": "Mit Raita & Sauce",
+    "description": "Perfekt für Familien, Partys und echte Briyani-Liebhaber!",
+    "bucketS": {
+      "name": "Eimer S",
+      "people": "~3 Personen",
+      "price": "€ 41"
+    },
+    "bucketM": {
+      "name": "Eimer M",
+      "people": "~5 Personen",
+      "price": "€ 62"
+    }
+  },
+  "aboutSection": {
+    "title": "ÜBER UNS",
+    "description": "Willkommen bei Dosa World, Hamburgs erstklassigem Ziel für authentische südindische Küche. Wir spezialisieren uns auf köstliche Dosas, Idlis und andere traditionelle Gerichte, alle aus frischen Zutaten und aromatischen Gewürzen hergestellt. Erleben Sie die lebendigen Aromen Südindiens in jedem Biss bei Dosa World.",
+    "button": "MEHR LESEN",
+    "imageAlt": "Traditionelles südindisches Essen"
+  },
+  "menuSection": {
+    "title": "UNSER MENÜ",
+    "description": "Dosa World bietet eine Vielzahl von südindischen Gerichten, darunter knusprige Dosas, würzige Biryanis und erfrischende Getränke wie Mango Lassi. Verpassen Sie nicht unser Spezialität Masala Dosa und würzigen Sambar. Entdecken Sie unser vollständiges Menü auf der Menüseite.",
+    "button": "MENÜ ANSEHEN",
+    "imageAlt": "Südindisches Menü"
+  },
+   "reservationSection": {
+    "title": "RESERVIERUNGEN",
+    "description": "Reservieren Sie Ihren Tisch bei Dosa World ganz einfach über unsere Online-Reservierungsfunktion. Buchen Sie im Voraus und genießen Sie ein reibungsloses kulinarisches Erlebnis im besten südindischen Restaurant Hamburgs.",
+    "button": "Tisch reservieren",
+    "imageAlt": "Biryani Eimer"
+  },
+  "quoteSection": {
+    "quote": "Der perfekte Ort für jeden Anlass",
+    "author": "- DOSA WORLD -"
+  },
+  "aboutPage": {
+    "title": "Über uns",
+    "paragraph1": "Willkommen bei Dosa World, wo südindische Aromen in Hamburg zum Leben erwachen. Unser Menü umfasst alles von knusprigen Dosas und weichen Idlis bis hin zu aromatischen Biryanis.",
+    "paragraph2": "Bei Dosa World legen wir Wert darauf, ein authentisches und unvergessliches kulinarisches Erlebnis zu bieten. Jedes Gericht ist eine Feier des südindischen Erbes.",
+    "quote": "Wir machen Essen, das Menschen glücklich macht",
+    "quoteAuthor": "- DOSA WORLD -",
+    "imageAlt": "Hotel"
+  },
+  "contactPage": {
+    "title": "Kontaktieren Sie uns",
+    "subtitle": "Füllen Sie das Formular aus, und wir werden uns so schnell wie möglich bei Ihnen melden.",
+    "form": {
+      "email": "E-Mail *",
+      "firstName": "Vorname *",
+      "lastName": "Nachname *",
+      "phone": "Telefon",
+      "submit": "Nachricht senden"
+    },
+    "addressSection": {
+      "heading": "WO WIR SIND",
+      "line1": "Lämmertwiete 2, 21073 Hamburg,",
+      "line2": "Deutschland, info@dosaworld.de",
+      "line3": "+4917622213135",
+      "line4": "04032527895"
+    }
+  },
+  "reservationsPage": {
+    "breadcrumb": {
+      "home": "Startseite",
+      "reservation": "Reservierung"
+    },
+    "header": {
+      "title": "RESERVIERUNG ANFORDERN",
+      "subtitle": "Geben Sie einige Details ein, um Ihre Anfrage zu stellen. BITTE WÄHLEN SIE ZEIT, UM DIE VERFÜGBAREN ZEITFENSTER ANZUZEIGEN.",
+      "on": "am",
+      "at": "um"
+    },
+    "form": {
+      "members": "Mitglieder",
+      "guest": "Gast",
+      "guests": "Gäste",
+      "date": "Datum",
+      "time": "Uhrzeit (automatisch aus Slot ausgewählt)",
+      "reserveNow": "JETZT RESERVIEREN",
+      "reserving": "Reservierung läuft..."
+    },
+    "timeslot": {
+      "choose": "Wählen Sie ein verfügbares Zeitfenster:",
+      "booked": "Belegt"
+    },
+    "alerts": {
+      "noTimeSelected": {
+        "title": "Keine Zeit ausgewählt",
+        "text": "Bitte wählen Sie ein Zeitfenster, bevor Sie reservieren!"
+      },
+      "reservationConfirmed": "Reservierung bestätigt!",
+      "reservationErrorTitle": "Hoppla...",
+      "reservationErrorText": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+      "closedOnMonday": {
+        "title": "Montags geschlossen",
+        "text": "Reservierungen sind montags nicht verfügbar. Bitte wählen Sie einen anderen Tag."
+      }
+    }
+  }
+}

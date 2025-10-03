@@ -1,23 +1,21 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Contact = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="min-h-screen">
       <Header />
-      
+
       {/* Hero Section */}
       <div>
         <div className="flex flex-wrap mt-20">
           {/* Left Panel */}
           <div className="w-full md:w-[55%] lg:w-1/2 bg-[#33522d] flex items-start justify-center pr-20 sm:pr-10 h-full">
-            <div className="p-12 w-full max-w-2xl pr-0  mb-20">
+            <div className="p-12 w-full max-w-2xl pr-0 mb-20">
               
               {/* Icon */}
               <div className="mb-6">
@@ -33,75 +31,90 @@ const Contact = () => {
               </div>
 
               {/* Heading */}
-              <h1 className="text-white font-sans font-semibold font-medium uppercase text-[40px] md:text-[50px] lg:text-[70px] leading-tight py-10 sm:py-5">
-                Contact Us
+              <h1 className="text-white font-sans font-semibold uppercase text-[40px] md:text-[50px] lg:text-[70px] leading-tight py-10 sm:py-5">
+                {t("contactPage.title")}
               </h1>
 
               {/* Subtitle */}
               <p className="text-white mt-4 mb-8 tracking-wide font-medium text-sm sm:text-xl md:text-base">
-                Fill out the form and we will reach out as soon as possible.
+                {t("contactPage.subtitle")}
               </p>
 
               {/* Form Card */}
               <div>
                 <form className="space-y-6">
-                  {/* Name fields */}
+                  {/* Email */}
                   <div className="mb-8">
                     <label htmlFor="email" className="text-white block text-lg font-semibold mb-1">
-                      Email *
+                      {t("contactPage.form.email")}
                     </label>
-                    <input type="email" id="email" className="w-full bg-transparent border-b border-white text-white placeholder-white focus:outline-none py-2" />
+                    <input 
+                      type="email" 
+                      id="email" 
+                      className="w-full bg-transparent border-b border-white text-white placeholder-white focus:outline-none py-2" 
+                    />
                   </div>
+
+                  {/* First & Last Name */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
                     <div className="mb-8">
                       <label htmlFor="firstName" className="text-white block text-lg font-semibold mb-1">
-                        First Name *
+                        {t("contactPage.form.firstName")}
                       </label>
-                      <input type="text" id="firstName" className="w-full bg-transparent border-b border-white text-white placeholder-white focus:outline-none py-2" />
+                      <input 
+                        type="text" 
+                        id="firstName" 
+                        className="w-full bg-transparent border-b border-white text-white placeholder-white focus:outline-none py-2" 
+                      />
                     </div>
                     <div className="mb-8">
                       <label htmlFor="lastName" className="text-white block text-lg font-semibold mb-1">
-                        Last Name *
+                        {t("contactPage.form.lastName")}
                       </label>
-                      <input type="text" id="lastName" className="w-full bg-transparent border-b border-white text-white placeholder-white focus:outline-none py-2" />
+                      <input 
+                        type="text" 
+                        id="lastName" 
+                        className="w-full bg-transparent border-b border-white text-white placeholder-white focus:outline-none py-2" 
+                      />
                     </div>
                   </div>
-                  
+
+                  {/* Phone & Submit */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
-                  {/* Phone */}
                     <div className="mb-8">
                       <label htmlFor="phone" className="text-white block text-lg font-semibold mb-1">
-                        Phone
+                        {t("contactPage.form.phone")}
                       </label>
-                      <input type="tel" id="phone" className="w-full bg-transparent border-b border-white text-white placeholder-white focus:outline-none py-2"  />
+                      <input 
+                        type="tel" 
+                        id="phone" 
+                        className="w-full bg-transparent border-b border-white text-white placeholder-white focus:outline-none py-2"  
+                      />
                     </div>
                     <div className="mb-8">
-                      <button 
+                      <Button 
                         type="submit"
-                        className="w-full py-3 mt-4 text-white hover:bg-white hover:text-[#33522d] transition-colors rounded-full border-[2px] border-white  font-semibold hover:font-medium"
+                        className="w-full py-4 mt-4 text-white hover:bg-white hover:text-[#33522d] transition-colors rounded-full border-[2px] border-white font-semibold hover:font-medium"
                       >
-                        Send Message
-                      </button>
+                        {t("contactPage.form.submit")}
+                      </Button>
                     </div>                    
                   </div>
-                  <div className="address">
-                      <p className=" py-1.5 text-3xl text-white">WHERE WE ARE</p>
-                      <p className=" py-1.5 text-2xl text-white">Lämmertwiete 2, 21073 Hamburg,</p>
-                      <p className=" py-1.5 text-2xl text-white">Germany, info@dosaworld.de</p>
-                      <p className=" py-1.5 text-2xl text-white">+4917622213135</p>
-                      <p className=" py-1.5 text-2xl text-white">04032527895</p>
-                    </div>
+
+                  {/* Address Section */}
+                  <div className="address mt-8">
+                    <p className="py-1.5 text-3xl text-white">{t("contactPage.addressSection.heading")}</p>
+                    <p className="py-1.5 text-2xl text-white">{t("contactPage.addressSection.line1")}</p>
+                    <p className="py-1.5 text-2xl text-white">{t("contactPage.addressSection.line2")}</p>
+                    <p className="py-1.5 text-2xl text-white">{t("contactPage.addressSection.line3")}</p>
+                    <p className="py-1.5 text-2xl text-white">{t("contactPage.addressSection.line4")}</p>
+                  </div>
                 </form>
               </div>
             </div>
           </div>
 
-
-          {/* Right Panel */}
-
-
-
-
+          {/* Right Panel - Google Map */}
           <div className="w-full md:w-[45%] lg:w-1/2">
             <div className="w-full h-[450px] md:h-full">
               <iframe
@@ -109,13 +122,12 @@ const Contact = () => {
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
-                allowFullScreen=""
+                allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 className="w-full h-full"
               />
             </div>
-
           </div>
         </div>
       </div>

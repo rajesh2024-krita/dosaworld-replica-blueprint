@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 import bgImage from "../assets/11062b_909c4c1a78e54f998e22ac4141a1505c~mv2.avif";
 import reservationimg from "../assets/reservation-img.avif";
 import { Button } from "./ui/button";
+import { useTranslation } from "react-i18next";
 
 const ReservationSection = () => {
+  const { t } = useTranslation();
+
   return (
     <section
       className="bg-cover bg-center w-full"
@@ -29,13 +32,11 @@ const ReservationSection = () => {
               </svg>
 
               <h2 className="font-serif text-3xl sm:text-4xl md:text-[60px] font-bold mb-6">
-                RESERVATIONS
+                {t("reservationSection.title")}
               </h2>
 
               <p className="text-base sm:text-lg mb-6 leading-relaxed text-white max-w-xl mx-auto md:mx-0">
-                Reserve your table at Dosa World with ease using our online
-                reservation feature. Book in advance and enjoy a seamless
-                dining experience at Hamburg’s top South Indian restaurant.
+                {t("reservationSection.description")}
               </p>
 
               <Link to="/reservations">
@@ -43,7 +44,7 @@ const ReservationSection = () => {
                   size="lg"
                   className="border-white border uppercase bg-transparent text-white rounded-full text-base sm:text-lg hover:bg-[#0A2006] hover:border-[#0A2006]"
                 >
-                  Reserve your table
+                  {t("reservationSection.button")}
                 </Button>
               </Link>
             </div>
@@ -52,7 +53,7 @@ const ReservationSection = () => {
             <div className="flex justify-center md:justify-end">
               <img
                 src={reservationimg}
-                alt="Biryani Bucket"
+                alt={t("reservationSection.imageAlt")}
                 className="w-full max-w-sm md:max-w-md rounded-lg shadow-lg object-cover"
               />
             </div>

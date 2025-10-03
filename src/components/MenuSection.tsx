@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import heroDosa from "@/assets/idly.avif";
+import { useTranslation } from "react-i18next";
 
 const MenuSection = () => {
+  const { t } = useTranslation();
+
   return (
     <section id="menu" className="w-full">
       <div className="grid md:grid-cols-2 gap-0 items-stretch min-h-[500px]">
@@ -11,7 +14,7 @@ const MenuSection = () => {
         <div className="relative w-full h-[300px] md:h-auto">
           <img
             src={heroDosa}
-            alt="South Indian Menu"
+            alt={t("menuSection.imageAlt")}
             className="absolute inset-0 w-full h-full object-cover"
           />
         </div>
@@ -32,14 +35,11 @@ const MenuSection = () => {
           </svg>
 
           <h2 className="font-serif text-3xl sm:text-4xl md:text-[60px] font-bold mb-6 text-[#0A2006]">
-            OUR MENU
+            {t("menuSection.title")}
           </h2>
 
           <p className="text-base sm:text-lg mb-6 leading-relaxed text-black max-w-xl mx-auto md:mx-0">
-            Dosa World offers a variety of South Indian dishes, including crispy dosas,
-            flavorful biryanis, and refreshing drinks like mango lassi. Don't miss our
-            specialty Masala Dosa and tangy Sambar. Explore our full menu by visiting
-            the menu page.
+            {t("menuSection.description")}
           </p>
 
           <Link to="/online-ordering">
@@ -47,7 +47,7 @@ const MenuSection = () => {
               size="lg"
               className="border-[#0A2006] border bg-transparent text-[#0A2006] rounded-full text-base sm:text-lg hover:bg-[#0A2006] hover:text-white transition-all duration-300"
             >
-              VIEW MENU
+              {t("menuSection.button")}
             </Button>
           </Link>
         </div>

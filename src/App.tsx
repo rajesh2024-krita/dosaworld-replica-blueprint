@@ -10,6 +10,7 @@ import Contact from "./pages/Contact";
 import MenuManagement from "./pages/MenuManagement";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
+import "./i18n";
 
 const queryClient = new QueryClient();
 
