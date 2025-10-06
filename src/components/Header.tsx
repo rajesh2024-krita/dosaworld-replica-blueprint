@@ -19,8 +19,8 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm p-3 transition-all duration-300
-      ${isHomePage ? "bg-[#0A2006]" : "bg-[#0A2006] shadow-md"}`}
+      className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm  border-b border-green-900 p-3 transition-all duration-300
+      ${isHomePage ? "bg-[#122F0D]" : "bg-[#122F0D] shadow-md"}`}
     >
       <div className="container px-6 md:px-32 h-16 flex items-center justify-between">
 
@@ -115,7 +115,7 @@ const Header = () => {
         <nav className="flex flex-col p-4 space-y-6 uppercase text-white text-[24px] text-center">
           {isHomePage ? (
             <>
-              <Link to="/online-ordering" onClick={() => setIsMenuOpen(false)}>{t("header.menu") || "Menu"}</Link>
+              <Link to="/menu-list" onClick={() => setIsMenuOpen(false)}>{t("header.menu") || "Menu"}</Link>
               <Link to="/reservations" onClick={() => setIsMenuOpen(false)}>{t("header.reservation") || "Reservation"}</Link>
               <Link to="/contact" onClick={() => setIsMenuOpen(false)}>{t("header.contact") || "Contact Us"}</Link>
               <Link to="/about" onClick={() => setIsMenuOpen(false)}>{t("header.about") || "About"}</Link>

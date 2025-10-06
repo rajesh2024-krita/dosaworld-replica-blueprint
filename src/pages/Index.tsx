@@ -8,6 +8,7 @@ import QuoteSection from "@/components/QuoteSection";
 import ReviewsSection from "@/components/ReviewsSection";
 import Footer from "@/components/Footer";
 import './marquee.css';
+import OfferSection from "./OfferSection";
 
 const Index = () => {
   return (
@@ -27,7 +28,8 @@ const Index = () => {
           ))}
         </div>
       </div>
-      <PromoBanner />
+      {/* <PromoBanner /> */}
+      <OfferSection />
       <AboutSection />
       <MenuSection />
       <div className="overflow-hidden w-full bg-white py-4">

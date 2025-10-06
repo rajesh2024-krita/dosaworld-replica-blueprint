@@ -7,6 +7,15 @@ import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
 import { api } from "@/hooks/axios";
 
+// Loader Component
+const Loader = () => {
+  return (
+    <div className="flex items-center justify-center h-screen">
+      <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-green-600 border-solid"></div>
+    </div>
+  );
+};
+
 const Reservations = () => {
   const { t } = useTranslation();
 
@@ -22,6 +31,7 @@ const Reservations = () => {
   const [time, setTime] = useState("");
   const [selectedSlot, setSelectedSlot] = useState("");
   const [loading, setLoading] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
 
   // Step management
   const [currentStep, setCurrentStep] = useState(1);
@@ -54,7 +64,21 @@ const Reservations = () => {
   };
 
   useEffect(() => {
-    fetchAvailableTimeSlots();
+    const initializeData = async () => {
+      try {
+        setInitialLoading(true);
+        await Promise.all([
+          fetchAvailableTimeSlots(),
+          fetchBookedSlots(date)
+        ]);
+      } catch (error) {
+        console.error("Error initializing data:", error);
+      } finally {
+        setInitialLoading(false);
+      }
+    };
+
+    initializeData();
   }, []);
 
   useEffect(() => {
@@ -152,6 +176,11 @@ const Reservations = () => {
   const handleBackToTimeSelection = () => {
     setCurrentStep(1);
   };
+
+  // Show loader while initial data is loading
+  if (initialLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="min-h-screen bg-white font-sans text-green-900">
@@ -402,9 +431,14 @@ const Reservations = () => {
                 disabled={loading || !agreeToTerms || !firstName || !lastName || !phone || !email}
                 className="rounded-full border-2 border-yellow-600 text-black font-sans hover:bg-yellow-600 hover:text-black font-semibold px-6 py-2 transition disabled:opacity-50"
               >
-                {loading
-                  ? t("reservationsPage.form.reserving")
-                  : "Complete Reservation"}
+                {loading ? (
+                  <div className="flex items-center">
+                    <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-black border-solid mr-2"></div>
+                    {t("reservationsPage.form.reserving")}
+                  </div>
+                ) : (
+                  "Complete Reservation"
+                )}
               </button>
             </div>
           </>

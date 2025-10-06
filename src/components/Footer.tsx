@@ -86,7 +86,7 @@ const Footer = () => {
           {/* Quick Links */}
           <div>
             <ul className="space-y-2 text-center">
-              <li><Link to="#" className="underline text-restaurant-cream  transition-colors text-white text-xs md:text-lg">Impressum</Link></li>
+              <li><Link to="/impressum" className="underline text-restaurant-cream  transition-colors text-white text-xs md:text-lg">Impressum</Link></li>
               <li><Link to="/privacy-policy" className="underline text-restaurant-cream  transition-colors text-white text-xs md:text-lg">Privacy Policy</Link></li>
             </ul>
           </div>

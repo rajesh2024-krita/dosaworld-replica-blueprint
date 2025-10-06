@@ -3,15 +3,18 @@ import { useEffect, useState, useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { api } from "@/hooks/axios";
+import Loader from "@/components/Loader";
 
 const MenuManagement = () => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [menuCategories, setMenuCategories] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const categoryRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   useEffect(() => {
     const fetchMenu = async () => {
       try {
+        setLoading(true);
         const res = await api.get("/menu");
         const menuData = res.data; // Already grouped by category
 
@@ -21,6 +24,8 @@ const MenuManagement = () => {
         }
       } catch (err) {
         console.error("Error fetching menu:", err);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -29,6 +34,8 @@ const MenuManagement = () => {
 
   // Intersection Observer
   useEffect(() => {
+    if (menuCategories.length === 0) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -46,6 +53,10 @@ const MenuManagement = () => {
 
     return () => observer.disconnect();
   }, [menuCategories]);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -73,7 +84,6 @@ const MenuManagement = () => {
         </div>
 
         {/* RIGHT MENU LIST */}
-        {/* RIGHT MENU LIST */}
         <div className="flex-1 bg-[#33522D] mt-20 p-4">
           {menuCategories.map((cat: any) => (
             <div
@@ -97,7 +107,6 @@ const MenuManagement = () => {
             </div>
           ))}
         </div>
-
       </div>
 
       <Footer />

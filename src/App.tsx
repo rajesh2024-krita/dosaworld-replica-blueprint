@@ -11,6 +11,7 @@ import MenuManagement from "./pages/MenuManagement";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
 import "./i18n";
+import Impressum from "./pages/Impressum";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/menu-list" element={<MenuManagement />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/impressum" element={<Impressum />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
