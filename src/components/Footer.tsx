@@ -46,11 +46,11 @@ const Footer = () => {
           {/* Quick Links */}
           <div>
             <ul className="space-y-2 text-center uppercase">
-              <li><Link to="/" className="text-restaurant-cream  transition-colors text-white text-xs md:text-lg">Home</Link></li>
-              <li><Link to="/online-ordering" className="text-restaurant-cream  transition-colors text-white text-xs md:text-lg">Menu</Link></li>
-              <li><Link to="/about" className="text-restaurant-cream  transition-colors text-white text-xs md:text-lg">About</Link></li>
-              <li><Link to="/contact" className="text-restaurant-cream  transition-colors text-white text-xs md:text-lg">Contact Us</Link></li>
-              <li><Link to="/reservations" className="text-restaurant-cream  transition-colors text-white text-xs md:text-lg">Reservations</Link></li>
+              <li><Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="text-restaurant-cream  transition-colors text-white text-xs md:text-lg">Home</Link></li>
+              <li><Link to="/menu-list" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="text-restaurant-cream  transition-colors text-white text-xs md:text-lg">Menu</Link></li>
+              <li><Link to="/about" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="text-restaurant-cream  transition-colors text-white text-xs md:text-lg">About</Link></li>
+              <li><Link to="/contact" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="text-restaurant-cream  transition-colors text-white text-xs md:text-lg">Contact Us</Link></li>
+              <li><Link to="/reservations" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="text-restaurant-cream  transition-colors text-white text-xs md:text-lg">Reservations</Link></li>
             </ul>
           </div>
 
@@ -86,8 +86,8 @@ const Footer = () => {
           {/* Quick Links */}
           <div>
             <ul className="space-y-2 text-center">
-              <li><Link to="/impressum" className="underline text-restaurant-cream  transition-colors text-white text-xs md:text-lg">Impressum</Link></li>
-              <li><Link to="/privacy-policy" className="underline text-restaurant-cream  transition-colors text-white text-xs md:text-lg">Privacy Policy</Link></li>
+              <li><Link to="/impressum" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="underline text-restaurant-cream  transition-colors text-white text-xs md:text-lg">Impressum</Link></li>
+              <li><Link to="/privacy-policy" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="underline text-restaurant-cream  transition-colors text-white text-xs md:text-lg">Privacy Policy</Link></li>
             </ul>
           </div>
         </div>

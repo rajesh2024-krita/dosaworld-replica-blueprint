@@ -18,6 +18,21 @@ const MenuManagement = () => {
         const res = await api.get("/menu");
         const menuData = res.data; // Already grouped by category
 
+        // Preload images
+        const imagePromises = menuData
+          .filter((cat: any) => cat.image)
+          .map(
+            (cat: any) =>
+              new Promise((resolve, reject) => {
+                const img = new Image();
+                img.src = cat.image;
+                img.onload = resolve;
+                img.onerror = reject;
+              })
+          );
+
+        await Promise.all(imagePromises);
+
         setMenuCategories(menuData);
         if (menuData.length > 0) {
           setActiveCategory(String(menuData[0].id));
@@ -92,7 +107,7 @@ const MenuManagement = () => {
               ref={(el) => (categoryRefs.current[cat.id] = el)}
               className="min-h-screen py-12"
             >
-              <h1 className="text-4xl font-bold text-[#FE8500]">{cat.name}</h1>
+              <h1 className="md:text-4xl text-lg font-bold text-[#FE8500]">{cat.name}</h1>
               <ul className="space-y-10 mt-4">
                 {cat.items.map((item: any) => (
                   <li
