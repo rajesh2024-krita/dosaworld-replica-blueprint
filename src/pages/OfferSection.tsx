@@ -57,7 +57,7 @@ const OfferSection: React.FC = () => {
 
     return (
         <>
-            {offerSections.map((section) => (
+            {offerSections.filter(section => section.isActive).map((section) => (
                 <section
                     key={section._id}
                     className="bg-cover bg-center w-full"
