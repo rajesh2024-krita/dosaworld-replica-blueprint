@@ -380,7 +380,7 @@ const Reservations = () => {
                 />
               </div>
               <div>
-                <Label text="Phone *" />
+                <Label text="Phone (with country code) *" />
                 <input
                   type="tel"
                   value={phone}
