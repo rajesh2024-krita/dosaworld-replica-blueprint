@@ -281,7 +281,8 @@ const Reservations = () => {
                 <Label text={t("reservationsPage.form.time")} />
                 <input
                   type="text"
-                  value={selectedSlot || t("reservationsPage.form.selectTimeBelow")}
+                  // value={selectedSlot || t("reservationsPage.form.selectTimeBelow")}
+                  value={selectedSlot || t("00:00:00")}
                   readOnly
                   className="w-full border-2 border-gray-300 rounded-md px-4 py-2 text-sm bg-gray-100 text-green-900"
                 />

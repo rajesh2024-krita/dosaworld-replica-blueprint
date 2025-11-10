@@ -20,9 +20,6 @@ const Header = () => {
     de: germany,
   };
 
-  // Always default to Germany flag if no language set
-  const currentFlag = flags[i18n.language] || uk;
-
   const changeLanguage = (lng: "en" | "de") => {
     i18n.changeLanguage(lng);
     setIsLangOpen(false);
@@ -30,7 +27,7 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b border-green-900 p-3 transition-all duration-300
+      className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm  border-b border-green-900 p-3 transition-all duration-300
       ${isHomePage ? "bg-[#122F0D]" : "bg-[#122F0D] shadow-md"}`}
     >
       <div className="container px-6 md:px-32 h-16 flex items-center justify-between">
@@ -39,13 +36,7 @@ const Header = () => {
         <nav className="hidden md:flex items-center space-x-8 uppercase text-[18px]">
           {isHomePage ? (
             <>
-              <Link
-                to="/menu-list"
-                className="text-white hover:text-[#FF8601] transition-colors"
-                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              >
-                {t("header.menu") || "Menu"}
-              </Link>
+              <Link to="/menu-list" className="text-white hover:text-[#FF8601] transition-colors" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>{t("header.menu") || "Menu"}</Link>
               <Link to="/reservations">
                 <Button className="w-full text-white border-white uppercase text-[18px] font-normal p-6 border-2 rounded-full bg-transparent hover:border-[#33522D] transition-all duration-300 hover:text-[#FF8601]">
                   {t("header.reservation") || "Reservation"}
@@ -54,20 +45,8 @@ const Header = () => {
             </>
           ) : (
             <>
-              <Link
-                to="/contact"
-                className="text-white hover:text-[#FF8601] transition-colors"
-                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              >
-                {t("header.contact") || "Contact Us"}
-              </Link>
-              <Link
-                to="/about"
-                className="text-white hover:text-[#FF8601] transition-colors"
-                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              >
-                {t("header.about") || "About"}
-              </Link>
+              <Link to="/contact" className="text-white hover:text-[#FF8601] transition-colors" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>{t("header.contact") || "Contact Us"}</Link>
+              <Link to="/about" className="text-white hover:text-[#FF8601] transition-colors" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>{t("header.about") || "About"}</Link>
             </>
           )}
         </nav>
@@ -81,26 +60,11 @@ const Header = () => {
         <nav className="hidden md:flex items-center space-x-8 uppercase text-[18px] relative">
           {isHomePage ? (
             <>
-              <Link
-                to="/contact"
-                className="text-white hover:text-[#FF8601] transition-colors"
-                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              >
-                {t("header.contact") || "Contact Us"}
-              </Link>
-              <Link
-                to="/about"
-                className="text-white hover:text-[#FF8601] transition-colors"
-                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              >
-                {t("header.about") || "About"}
-              </Link>
+              <Link to="/contact" className="text-white hover:text-[#FF8601] transition-colors" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>{t("header.contact") || "Contact Us"}</Link>
+              <Link to="/about" className="text-white hover:text-[#FF8601] transition-colors" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>{t("header.about") || "About"}</Link>
             </>
           ) : (
-            <Link
-              to="/"
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            >
+            <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
               <Button className="w-full text-white border-white uppercase text-[18px] font-normal p-6 border-2 rounded-full bg-transparent hover:border-[#33522D] transition-all duration-300 hover:text-[#FF8601]">
                 {t("header.home") || "Home"}
               </Button>
@@ -113,8 +77,7 @@ const Header = () => {
               onClick={() => setIsLangOpen(!isLangOpen)}
               className="flex items-center text-white hover:text-[#FF8601] transition-colors"
             >
-              {/* ✅ Always show Germany flag by default */}
-              <img src={currentFlag} alt={i18n.language} className="h-6 w-6" />
+              <img src={flags[i18n.language]} alt={i18n.language} className="h-6 w-6" />
               <ChevronDown className="ml-1 w-4 h-4" />
             </button>
 
@@ -138,7 +101,10 @@ const Header = () => {
         </nav>
 
         {/* ====== MOBILE MENU BUTTON ====== */}
-        <button className="md:hidden" onClick={() => setIsMenuOpen(true)}>
+        <button
+          className="md:hidden"
+          onClick={() => setIsMenuOpen(true)}
+        >
           <Menu className="h-6 w-6 text-white" />
         </button>
       </div>
@@ -157,89 +123,58 @@ const Header = () => {
         <nav className="flex flex-col p-4 space-y-6 uppercase text-white text-[24px] text-center">
           {isHomePage ? (
             <>
-              <Link
-                to="/menu-list"
+              <Link to="/menu-list"
                 onClick={() => {
                   setIsMenuOpen(false);
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
-              >
-                {t("header.menu") || "Menu"}
-              </Link>
-              <Link
-                to="/reservations"
+              >{t("header.menu") || "Menu"}</Link>
+              <Link to="/reservations"
                 onClick={() => {
                   setIsMenuOpen(false);
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
-              >
-                {t("header.reservation") || "Reservation"}
-              </Link>
-              <Link
-                to="/contact"
+              >{t("header.reservation") || "Reservation"}</Link>
+              <Link to="/contact"
                 onClick={() => {
                   setIsMenuOpen(false);
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
-              >
-                {t("header.contact") || "Contact Us"}
-              </Link>
-              <Link
-                to="/about"
+              >{t("header.contact") || "Contact Us"}</Link>
+              <Link to="/about"
                 onClick={() => {
                   setIsMenuOpen(false);
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
-              >
-                {t("header.about") || "About"}
-              </Link>
+              >{t("header.about") || "About"}</Link>
             </>
           ) : (
             <>
-              <Link
-                to="/contact"
+              <Link to="/contact"
                 onClick={() => {
                   setIsMenuOpen(false);
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
-              >
-                {t("header.contact") || "Contact Us"}
-              </Link>
-              <Link
-                to="/about"
+              >{t("header.contact") || "Contact Us"}</Link>
+              <Link to="/about"
                 onClick={() => {
                   setIsMenuOpen(false);
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
-              >
-                {t("header.about") || "About"}
-              </Link>
-              <Link
-                to="/"
+              >{t("header.about") || "About"}</Link>
+              <Link to="/"
                 onClick={() => {
                   setIsMenuOpen(false);
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
-              >
-                {t("header.home") || "Home"}
-              </Link>
+              >{t("header.home") || "Home"}</Link>
             </>
           )}
 
           {/* MOBILE LANGUAGE SWITCH */}
           <div className="mt-6 flex justify-center space-x-4">
-            <button
-              onClick={() => changeLanguage("en")}
-              className="text-white hover:text-[#FF8601]"
-            >
-              EN - UK
-            </button>
-            <button
-              onClick={() => changeLanguage("de")}
-              className="text-white hover:text-[#FF8601]"
-            >
-              DE
-            </button>
+            <button onClick={() => changeLanguage("en")} className="text-white hover:text-[#FF8601]">EN - UK</button>
+            <button onClick={() => changeLanguage("de")} className="text-white hover:text-[#FF8601]">DE</button>
           </div>
         </nav>
       </div>
