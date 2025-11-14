@@ -55,6 +55,8 @@ const OfferSection: React.FC = () => {
         );
     }
 
+    const IMAGE_BASE_URL = "https://dosaworld.de";
+
     return (
         <>
             {offerSections.filter(section => section.isActive).map((section) => (
@@ -95,12 +97,12 @@ const OfferSection: React.FC = () => {
 
                                 <div className="flex justify-center">
                                     <img
-                                        src={`https://dosaworldadmin.kritatechnosolutions.com${section.biryaniImage}` || biryaniImage}
+                                        src={
+                                            section.biryaniImage?.startsWith("/var/www")
+                                                ? IMAGE_BASE_URL + section.biryaniImage.replace("/var/www/dosaworld-frontend/dist", "")
+                                                : IMAGE_BASE_URL + section.biryaniImage
+                                        }
                                         alt={section.title}
-                                        className="w-64 h-64 object-cover rounded-lg shadow-lg border-2 border-white"
-                                        onError={(e) => {
-                                            e.currentTarget.src = biryaniImage;
-                                        }}
                                     />
                                 </div>
                             </div>
