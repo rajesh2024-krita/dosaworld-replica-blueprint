@@ -81,7 +81,7 @@ const OfferSection: React.FC = () => {
                                     <div className="space-y-4">
                                         {Object.keys(section.buckets).map((size) => {
                                             const bucket = section.buckets[size];
-                                            console.log('bucket == ', bucket)
+                                            // console.log('bucket == ', bucket)
                                             return (
                                                 <div key={size} className="flex justify-between items-center bg-white bg-opacity-10 p-4 rounded-lg backdrop-blur-sm">
                                                     <div>
