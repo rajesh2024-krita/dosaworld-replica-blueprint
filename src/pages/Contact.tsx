@@ -177,10 +177,10 @@ const Contact = () => {
       });
 
       const res = await response.json();
-      console.log("API Response:", res);
+      // console.log("API Response:", res);
       alert("Submitted Successfully!");
     } catch (error) {
-      console.error("Error submitting:", error);
+      // console.error("Error submitting:", error);
       alert("Something went wrong.");
     }
   };
