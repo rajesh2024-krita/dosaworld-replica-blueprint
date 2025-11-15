@@ -168,7 +168,7 @@ const Contact = () => {
 
     try {
       formData.name = formData.firstName + " " + formData.lastName;
-      const response = await fetch("https://www.dosaworld.de/api/contactus", {
+      const response = await fetch("https://api.dosaworld.de/api/contactus", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
