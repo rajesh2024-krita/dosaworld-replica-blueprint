@@ -27,7 +27,9 @@ const Reservations = () => {
   const [agreeToTerms, setAgreeToTerms] = useState(false);
 
   const [partySize, setPartySize] = useState(2);
-  const [date, setDate] = useState("2025-08-05");
+  const today = new Date().toISOString().split("T")[0];
+  const [date, setDate] = useState(today);
+
   const [time, setTime] = useState("");
   const [selectedSlot, setSelectedSlot] = useState("");
   const [loading, setLoading] = useState(false);
@@ -141,18 +143,17 @@ const Reservations = () => {
       Swal.fire({
         icon: "success",
         title: t("reservationsPage.alerts.reservationConfirmed"),
-        html: `<b>${partySize}</b> ${
-          partySize === 1
-            ? t("reservationsPage.form.guest")
-            : t("reservationsPage.form.guests")
-        } ${t("reservationsPage.header.on")} <b>${date}</b> ${t(
-          "reservationsPage.header.at"
-        )} <b>${selectedSlot}</b>`,
+        html: `<b>${partySize}</b> ${partySize === 1
+          ? t("reservationsPage.form.guest")
+          : t("reservationsPage.form.guests")
+          } ${t("reservationsPage.header.on")} <b>${date}</b> ${t(
+            "reservationsPage.header.at"
+          )} <b>${selectedSlot}</b>`,
         confirmButtonColor: "#0a2006",
       });
 
       fetchBookedSlots(date);
-      
+
       // Reset form and go back to step 1
       setCurrentStep(1);
       setFirstName("");
@@ -259,9 +260,12 @@ const Reservations = () => {
                 <input
                   type="date"
                   value={date}
+                  min={new Date().toISOString().split("T")[0]} // <-- Prevents past dates
                   onChange={(e) => {
                     const newDate = e.target.value;
                     const day = new Date(newDate).getDay();
+
+                    // Block Monday
                     if (day === 1) {
                       Swal.fire({
                         icon: "info",
@@ -270,10 +274,12 @@ const Reservations = () => {
                       });
                       return;
                     }
+
                     setDate(newDate);
                   }}
                   className="w-full border-2 border-[#6c6d48] hover:border-[#0a2006] rounded-md px-4 py-2 text-sm bg-[#ffe0ab] text-green-900"
                 />
+
               </div>
 
               {/* Time Display */}
@@ -305,10 +311,9 @@ const Reservations = () => {
                       disabled={isBooked}
                       onClick={() => setSelectedSlot(slot)}
                       className={`rounded-full px-6 py-2 text-sm font-semibold transition-all duration-200 border-2 focus:outline-none
-                        ${
-                          isBooked
-                            ? "bg-red-300 text-red-700 border-red-400 cursor-not-allowed"
-                            : selectedSlot === slot
+                        ${isBooked
+                          ? "bg-red-300 text-red-700 border-red-400 cursor-not-allowed"
+                          : selectedSlot === slot
                             ? "bg-[#ffa304] text-black border-[#0a2006]"
                             : "bg-green-900 text-white border-green-900 hover:bg-[#ffa304] hover:border-[#0a2006] hover:text-black"
                         }`}
@@ -413,7 +418,7 @@ const Reservations = () => {
                   className="mt-1 w-4 h-4 text-green-900 bg-gray-100 border-gray-300 rounded focus:ring-green-900 focus:ring-2"
                 />
                 <label htmlFor="agreeToTerms" className="text-sm text-green-900">
-                  I agree to the terms and conditions and understand that this reservation is subject to confirmation. 
+                  I agree to the terms and conditions and understand that this reservation is subject to confirmation.
                   I acknowledge that I may be contacted regarding my reservation details.
                 </label>
               </div>
