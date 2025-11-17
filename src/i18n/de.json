@@ -89,7 +89,7 @@
       "at": "um"
     },
     "form": {
-      "members": "Mitglieder",
+      "table_no": "Tischnummer",
       "guest": "Gast",
       "guests": "Gäste",
       "date": "Datum",

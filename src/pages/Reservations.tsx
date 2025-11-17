@@ -37,12 +37,16 @@ const Reservations = () => {
 
   // Step management
   const [currentStep, setCurrentStep] = useState(1);
+  const [selectedPartySize, setSelectedPartySize] = useState();
 
   const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>([]);
   const [bookedSlots, setBookedSlots] = useState<string[]>([]);
 
+  const [tables, setTables] = useState([]);
+
   const API_URL = "/reservations";
   const TIMESLOT_URL = "/timeslots";
+  const Table_URL = "/tables";
 
   // Fetch all timeslots
   const fetchAvailableTimeSlots = async () => {
@@ -54,12 +58,41 @@ const Reservations = () => {
     }
   };
 
+  const getTables = async () => {
+    try {
+      const res = await api.get(Table_URL);
+      const data = res.data;
+      setTables(data)
+      return data;
+    } catch (error) {
+      console.error("Error fetching tables:", error);
+      return [];
+    }
+  };
+
+  useEffect(() => {
+    const load = async () => {
+      const result = await getTables();
+    };
+    load();
+  }, []);
+
+
   // Fetch booked slots for selected date
-  const fetchBookedSlots = async (selectedDate: string) => {
+  const fetchBookedSlots = async (selectedDate: string, selectedTableNo: number) => {
     try {
       const res = await api.get(`${API_URL}?date=${selectedDate}`);
-      const reservedTimes = res.data.map((r: any) => r.time);
+
+      // Filter reservations that match selected date + table
+      const matchingReservations = res.data.filter(
+        (r: any) => r.party_size === selectedTableNo
+      );
+
+      // Extract only the booked times
+      const reservedTimes = matchingReservations.map((r: any) => r.time);
+
       setBookedSlots(reservedTimes);
+
     } catch (err) {
       console.error("Error fetching booked slots:", err);
     }
@@ -234,24 +267,27 @@ const Reservations = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
               {/* Party size */}
               <div>
-                <Label text={t("reservationsPage.form.members")} />
+                <Label text={t("reservationsPage.form.table_no")} />
                 <div className="relative">
                   <select
                     value={partySize}
-                    onChange={(e) => setPartySize(Number(e.target.value))}
+                    onChange={(e) => {
+                      const newSize = Number(e.target.value);
+                      setPartySize(newSize);
+                      fetchBookedSlots(date, newSize); // 🔥 fetch again
+                    }}
                     className="w-full appearance-none border-2 border-[#6c6d48] hover:border-[#0a2006] rounded-md px-4 py-2 pr-10 text-sm text-green-900 bg-[#ffe0ab]"
                   >
-                    {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
-                      <option key={num} value={num}>
-                        {num}{" "}
-                        {num === 1
-                          ? t("reservationsPage.form.guest")
-                          : t("reservationsPage.form.guests")}
+                    {tables.map((table) => (
+                      <option key={table.id} value={table.table_no}>
+                        Table {table.table_no} ({table.seats} seats)
                       </option>
                     ))}
                   </select>
+
                   <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-green-800 h-4 w-4 pointer-events-none" />
                 </div>
+
               </div>
 
               {/* Date */}
@@ -347,7 +383,7 @@ const Reservations = () => {
               <h3 className="text-lg font-semibold text-green-900 mb-4">Reservation Summary</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
-                  <p className="text-sm text-gray-600">Party Size</p>
+                  <p className="text-sm text-gray-600">Table</p>
                   <p className="font-semibold">
                     {partySize} {partySize === 1 ? t("reservationsPage.form.guest") : t("reservationsPage.form.guests")}
                   </p>

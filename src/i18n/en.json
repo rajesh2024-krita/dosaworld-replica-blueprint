@@ -89,7 +89,7 @@
       "at": "at"
     },
     "form": {
-      "members": "Members",
+      "table_no": "Table No",
       "guest": "guest",
       "guests": "guests",
       "date": "Date",
