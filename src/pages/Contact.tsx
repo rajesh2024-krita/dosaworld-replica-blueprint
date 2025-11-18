@@ -156,6 +156,7 @@ const Contact = () => {
     email: "",
     firstName: "",
     lastName: "",
+    phone: "",
     message: "",
     name:""
   });
@@ -177,7 +178,7 @@ const Contact = () => {
       });
 
       const res = await response.json();
-      // console.log("API Response:", res);
+      console.log("API Response:", res);
       alert("Submitted Successfully!");
     } catch (error) {
       // console.error("Error submitting:", error);
@@ -269,19 +270,30 @@ const Contact = () => {
                       />
                     </div>
                   </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
-
-                    {/* Message Field */}
-                    <div className="mb-8">
+                  <div className="mb-8">
                       <label htmlFor="message" className="text-white block text-lg font-semibold mb-1">
-                        Phone
+                        Message
                       </label>
                       <input
                         id="message"
                         className="w-full bg-transparent border-b border-white text-white placeholder-white focus:outline-none py-2"
                         value={formData.message}
                         onChange={(e) => updateField("message", e.target.value)}
+                      />
+                    </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+
+                    {/* Message Field */}
+                    <div className="mb-8">
+                      <label htmlFor="phone" className="text-white block text-lg font-semibold mb-1">
+                        Phone
+                      </label>
+                      <input
+                        id="Phone"
+                        className="w-full bg-transparent border-b border-white text-white placeholder-white focus:outline-none py-2"
+                        value={formData.phone}
+                        onChange={(e) => updateField("phone", e.target.value)}
                       />
                     </div>
 
