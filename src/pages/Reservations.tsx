@@ -44,6 +44,9 @@ const Reservations = () => {
 
   const [tables, setTables] = useState([]);
 
+  const [selectedTableSeats, setSelectedTableSeats] = useState(4);
+  const [members, setMembers] = useState("");
+
   const API_URL = "/reservations";
   const TIMESLOT_URL = "/timeslots";
   const Table_URL = "/tables";
@@ -164,6 +167,7 @@ const Reservations = () => {
       const payload = {
         first_name: firstName,
         last_name: lastName,
+        members: members,
         phone,
         email,
         party_size: partySize,
@@ -266,7 +270,7 @@ const Reservations = () => {
             {/* Reservation Inputs */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
               {/* Party size */}
-              <div>
+              {/* <div>
                 <Label text={t("reservationsPage.form.table_no")} />
                 <div className="relative">
                   <select
@@ -288,7 +292,59 @@ const Reservations = () => {
                   <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-green-800 h-4 w-4 pointer-events-none" />
                 </div>
 
+              </div> */}
+              <div>
+                <Label text={t("reservationsPage.form.table_no")} />
+                <select
+                  value={partySize}
+                  onChange={(e) => {
+                    const tableId = Number(e.target.value);
+
+                    const selectedTable = tables.find(
+                      (t) => t.id === tableId
+                    );
+
+                    setPartySize(tableId);
+                    setSelectedTableSeats(selectedTable?.seats || 1);
+                    fetchBookedSlots(date, tableId);
+                  }}
+                  className="w-full appearance-none border-2 border-[#6c6d48] hover:border-[#0a2006] rounded-md px-4 py-2 pr-10 text-sm text-green-900 bg-[#ffe0ab]"
+                >
+                  {tables.map((table) => (
+                    <option key={table.id} value={table.id}>
+                      Table {table.table_no} ({table.seats} seats)
+                    </option>
+                  ))}
+                </select>
               </div>
+
+
+              <div>
+                <Label text={t("reservationsPage.form.members")} />
+                <input
+                  type="number"
+                  value={members}
+                  // min={1}
+                  max={selectedTableSeats}
+                  onChange={(e) => {
+                    let val = Number(e.target.value);
+
+                    // 🔒 Prevent negative or zero values
+                    if (val < 1) val = 1;
+
+                    // 🔒 Prevent entering above seat limit
+                    if (val > selectedTableSeats) val = selectedTableSeats;
+
+                    setMembers(val);
+                  }}
+                  placeholder={`Max ${selectedTableSeats}`}
+                  className="w-full border-2 border-[#6c6d48] hover:border-[#0a2006] rounded-md px-4 py-2 text-sm text-green-900 bg-[#ffe0ab]"
+                />
+
+              </div>
+
+
+
 
               {/* Date */}
               <div>

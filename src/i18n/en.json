@@ -92,6 +92,7 @@
       "table_no": "Table No",
       "guest": "guest",
       "guests": "guests",
+      "members": "Members",
       "date": "Date",
       "time": "Time (auto-set from slot)",
       "reserveNow": "RESERVE NOW",
